@@ -1,9 +1,8 @@
 const express = require('express');
-const ProductManager = require('../src/desafio3');
+const ProductManager = require('../src/challengeDeliberable003');
 
 const app = express();
-
-const productos = new ProductManager('productos.txt');
+const productos = new ProductManager('Class004/productos.txt');
 
 app.get('/products', async (req, res) => {
     const { limit } = req.query;

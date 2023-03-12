@@ -206,7 +206,7 @@ const test = async () => {
     console.log(await productos.getProducts());
 
     /*
-    ✓ Se invoca al método “deleteProduct” para eliminar el producto con id 1,
+    ✓ Se aplica el método “deleteProduct” para eliminar el producto con id 1,
     se espera que se elimine el producto con id 1, y que se muestre por consola
     el resultado.
     **/
