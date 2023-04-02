@@ -1,6 +1,7 @@
-//const socket = io();
-//socket.emit('message', "Hello!, I am communicating from a websocket");
 const divProducts = document.getElementById("products");
+const socket = io();
+
+socket.emit('message', "Hello!, I am communicating from a websocket");
 
 fetch('/api/products/')
     .then(res => res.json())
