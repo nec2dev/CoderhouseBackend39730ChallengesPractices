@@ -15,9 +15,9 @@ socket.on('updateProducts', (message) => {
     fetch('/api/products/')
         .then(res => res.json())
         .then(data => {
-            let list = ''
+            let productsList = ''
             data.forEach(p => {
-                list += `title: ${p.title} ,
+                productsList += `title: ${p.title} ,
                 description: ${p.description} ,
                 code: ${p.code} ,
                 price: ${p.price} ,
@@ -26,7 +26,7 @@ socket.on('updateProducts', (message) => {
                 thumbnail: ${p.thumbnail} ,
                 id: ${p.id}</br>`
             });
-            divRealTimePorducts.innerHTML = list;
+            divRealTimePorducts.innerHTML = productsList;
         })
 })
 
@@ -55,9 +55,9 @@ socket.on('productList', (message) => {
     fetch('/api/products/')
         .then(res => res.json())
         .then(data => {
-            let list = ''
+            let productsList = ''
             data.forEach(p => {
-                list += `title: ${p.title} ,
+                productsList += `title: ${p.title} ,
                 description: ${p.description} ,
                 code: ${p.code} ,
                 price: ${p.price} ,
@@ -66,7 +66,7 @@ socket.on('productList', (message) => {
                 thumbnail: ${p.thumbnail} ,
                 id: ${p.id}</br>`
             });
-            divRealTimePorducts.innerHTML = list;
+            divRealTimePorducts.innerHTML = productsList;
         })
     }
 )

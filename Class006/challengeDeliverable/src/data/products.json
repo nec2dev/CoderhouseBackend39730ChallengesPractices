@@ -7,7 +7,7 @@
         "status": true,
         "stock": 4096,
         "category": "cat001",
-        "thumbnail": "./img/001Image.png",
+        "thumbnail": "/img/001Image.png",
         "id": 1
     },
     {
@@ -18,7 +18,7 @@
         "status": true,
         "stock": 2048,
         "category": "cat001",
-        "thumbnail": "./img/002Image.png",
+        "thumbnail": "/img/002Image.png",
         "id": 2
     },
     {
@@ -29,7 +29,7 @@
         "status": true,
         "stock": 1024,
         "category": "cat002",
-        "thumbnail": "./img/003Image.png",
+        "thumbnail": "/img/003Image.png",
         "id": 3
     },
     {
@@ -40,7 +40,7 @@
         "status": true,
         "stock": 512,
         "category": "cat002",
-        "thumbnail": "./img/004Image.png",
+        "thumbnail": "/img/004Image.png",
         "id": 4
     },
     {
@@ -51,7 +51,7 @@
         "status": true,
         "stock": 256,
         "category": "cat002",
-        "thumbnail": "./img/005Image.png",
+        "thumbnail": "/img/005Image.png",
         "id": 5
     },
     {
@@ -62,7 +62,7 @@
         "status": true,
         "stock": 4096,
         "category": "cat003",
-        "thumbnail": "./img/006Image.png",
+        "thumbnail": "/img/006Image.png",
         "id": 6
     },
     {
@@ -73,7 +73,7 @@
         "status": true,
         "stock": 4096,
         "category": "cat004",
-        "thumbnail": "./img/007Image.png",
+        "thumbnail": "/img/007Image.png",
         "id": 7
     }
 ]
