@@ -3,13 +3,13 @@ import cartManager from "../dao/managers/cart.manager.js";
 import productManager from "../dao/managers/product.manager.js"
 
 const router = Router();
-const carts = new cartManager("../src/data/carts.json");
-const products = new productManager("../src/data/products.json");
+const carts = new cartManager("./src/data/carts.json");
+const products = new productManager("../data/products.json");
 
 router.post("/", async (req, res) => {
     await carts.addCart();
-    const carts = await carts.getCarts();
-    res.send({ status: "ok", message: "Cart created", idCart: carts.pop().id });
+    const productsCarts = await carts.getCarts();
+    res.send({ status: "ok", message: "Cart created", idCart: productsCarts.pop().id });
 });
 
 router.get("/:cid", async (req, res) => {
