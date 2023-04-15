@@ -1,4 +1,5 @@
-import fs from 'fs';
+import cartsModel from "../models/carts.model.js";
+import productsModel from "../models/products.model.js";
 
 class CartManager {
     constructor(path) {

@@ -1,15 +1,19 @@
 import express from 'express';
 import __dirname from './utils.js';
 import handlebars from 'express-handlebars';
+import mongoose from "mongoose";
 import viewRouter from './routes/views.router.js';
-import { Server } from 'socket.io';
 import productRouter from './routes/products.router.js';
 import cartRouter from './routes/carts.router.js';
+import messageRouter from './routes/messages.router.js';
+import Messages from "./dao/managers/message.manager.js";
 
 const app = express(); 
 const PORT = 8080;
-const httpServer = app.listen(PORT, () => console.log("Server actvated on port: " + PORT));
-const socketServer = new Server(httpServer); 
+const server = app.listen(PORT, () => console.log("Server actvated on port: " + PORT));
+const io = new Server(server); 
+const connection = mongoose.connect('');
+const messagesManager = new Messages();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
@@ -20,15 +24,18 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', viewRouter); 
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
+app.use('/api/messages', messageRouter)
 
-socketServer.on('connection', socket => {
+io.on('connection', socket => {
     console.log("We have a client connected");
-    socket.on('message', data => {
-        console.log(data);
+    socket.on('authenticated', data => {
+        console.log(`username ${data} received`);
+        socket.broadcast.emit('newUserConnected', data);
     })
-    socket.emit('updateProducts', "List of all products")
-    socket.on('products', ()=>{
-        console.log("The products arrived");
-        socket.emit('productList', "All products ok");
+    socket.on("message", async (data) => {
+        console.log(data);
+        await messagesManager.saveMessage({ user: data.user, message: data.message })
+        const logs = await messagesManager.getAll();
+        io.emit("log", { logs });
     })
 })
