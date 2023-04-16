@@ -1,7 +1,7 @@
 import express from 'express';
 import __dirname from './utils.js';
+import mongoose from 'mongoose';
 import handlebars from 'express-handlebars';
-import mongoose from "mongoose";
 import cartRouter from './routes/carts.router.js';
 import messageRouter from './routes/messages.router.js';
 import productRouter from './routes/products.router.js';
@@ -12,7 +12,7 @@ import Messages from "./dao/managers/message.manager.js";
 const app = express(); 
 const PORT = 8080;
 const server = app.listen(PORT, () => console.log("Server actvated on port: " + PORT));
-const io = new Server(server) 
+const connection = mongoose.connect('mongodb+srv://nahuelezequielcorrea:zzmXziFAu9UoBl5C@cluster0.lq5rpf5.mongodb.net/?retryWrites=true&w=majority');
 const messagesManager = new Messages()
 
 app.use(express.json());
@@ -27,7 +27,7 @@ app.use('/api/messages', messageRouter)
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 
-io.on('connection', socket => {
+server.on('connection', socket => {
     console.log("We have a client connected");
     socket.on('authenticated', data => {
         console.log(`username ${data} received`);

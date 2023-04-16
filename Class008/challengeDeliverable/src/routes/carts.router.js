@@ -1,50 +1,31 @@
 import { Router } from "express";
-import cartManager from "../dao/managers/cart.manager.js";
-import productManager from "../dao/managers/product.manager.js"
+import Carts from "../dao/managers/cart.manager.js";
 
 const router = Router();
-const carts = new cartManager("./src/data/carts.json");
-const products = new productManager("../data/products.json");
+const cartsManager = new Carts();
 
-router.post("/", async (req, res) => {
-    await carts.addCart();
-    const productsCarts = await carts.getCarts();
-    res.send({ status: "ok", message: "Cart created", idCart: productsCarts.pop().id });
-});
-
-router.get("/:cid", async (req, res) => {
-    const idCart = Number(req.params.cid);
-    const arrayCarts = await carts.getCarts();
-    const cart = arrayCarts.find((cart) => cart.id === idCart);
-    cart ? res.send(cart.products) : res .status(400) .send({ status: "error", error: "The cart does not exist" });
-});
-
-router.get("/", async (req, res) => {
-    const carts_ = await carts.getCarts();
-    res.json({ carts_ });
-});
-
-router.post('/:cid/product/:pid', async (req, res) => {
-    const arrayCarts = await carts.getCarts();
-    const arrayProducts = await products.getProducts()
-    let cartIndex = arrayCarts.findIndex((cart) => cart.id == req.params.cid);
-    let productIndex = arrayProducts.findIndex((p) => p.id == req.params.pid);
-    if (cartIndex == -1) {
-        res.status(400).send({
-            status: "error",
-            error: "The cart does not exist",
-        });
-        return;
-    }
-    if (productIndex == -1) {
-        res.status(400).send({
-            status: "error",
-            error: "The cart does not exist",
-        });
-        return;
-    }
-    await carts.addProductToCart(Number(req.params.cid) , Number(req.params.pid));
-    res.send({ status: "ok", message: "Product added" });
+router.get('/' , async (req,res) => {
+    let carts = await cartsManager.getAll();
+    res.send({status:"success" , payload:carts})
 })
 
-export default router
+router.post('/' , async (req,res) => {
+    const result = await cartsManager.saveCart();
+    res.send({status:"success" , payload:result});
+})
+
+router.delete('/:cid' , async (req,res) => {
+    let id = req.params.cid;
+    const result = await cartsManager.deleteCart(id);
+    res.send({status:"success" , payload:result});
+})
+
+router.post('/:cid/product/:pid' , async (req,res) => {
+    let cid = req.params.cid;
+    let pid = req.params.pid;
+
+    let result = await cartsManager.addProductToCart(cid,pid);
+    res.send({status:"success" , payload:result});
+})
+
+export default router;

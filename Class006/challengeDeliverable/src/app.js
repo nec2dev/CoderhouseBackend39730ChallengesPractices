@@ -18,8 +18,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars'); 
 app.use(express.static(__dirname + '/public')); 
 app.use('/', viewRouter); 
-app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
+app.use('/api/messages', messageRouter);
+app.use('/api/products', productRouter);
+app.use('/api/users', userRouter);
+
 
 socketServer.on('connection', socket => {
     console.log("We have a client connected");

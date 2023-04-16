@@ -1,50 +1,47 @@
 import { Router } from "express";
-import productManager from "../dao/managers/product.manager.js"
+import Products from "../dao/managers/product.manager.js"
 
 const router = Router();
-const products = new productManager("./src/data/products.json");
+const productsManager = new Products();
 
-router.get('/', async (req, res) => {
-    const { limit } = req.query;
-    if (limit) {
-        const products = await products.getProducts();
-        const limitedProducts = products.slice(0, limit);
-        res.send(limitedProducts);
-    }
-    else {
-        const showProducts = await products.getProducts();
-        res.send(showProducts);
-    }
+router.get('/' , async (req,res) => {
+    let products = await productsManager.getAll();
+    res.send({status:"success" , payload:products})
 })
 
-router.get('/:pid', async (req, res) => {
-    const productId = req.params.pid;
-    const showProduct = await products.getProductById(parseInt(productId));
-    res.send(showProduct);
+router.post('/' , async (req,res) => {
+    const {title,description,price,code,quantity} = req.body;
+
+    let newProduct = {
+        title,
+        description,
+        price,
+        code,
+        quantity
+    };
+
+    const result = await productsManager.saveProduct(newProduct);
+    res.send({status:"success" , payload:result});
 })
 
-router.post('/' , (req , res) => {
-    const product = req.body;
-    products.addProduct(product);
-    res.send({status:"ok" , messsage:"Product created"});
-})
-
-router.put('/:pid' , async (req , res) => {
-    let product = req.body;
+router.put('/:pid' , async (req,res) => {
     let id = req.params.pid;
-    await products.updateProduct(Number(id) , product);
-    res.send({status:"ok" , message:"Product updated"});
-} )
-
-router.delete('/:pid' , async (req , res) => {
-    let id = req.params.pid;
-    let quantity = await products.getProducts().length;
-    let products = await products.deleteProduct(Number(id));
-     if(quantity === products.length) {
-         console.log(quantity , products);
-         return res.status(400).send({status:"error" , error:"Incomplete information"})
-     }
-    res.send({status:"ok" , message:"Product deleted"})
+    const {title,description,price,code,quantity} = req.body;
+    let updateProduct = {
+        title,
+        description,
+        price,
+        code,
+        quantity
+    };
+    let result = await productsManager.updateProduct(id,updateProduct)
+    res.send({status:"success" , payload:result})
 })
 
-export default router
+router.delete('/:pid' , async (req,res) => {
+    let id = req.params.pid;
+    let result = await productsManager.deleteProduct(id);
+    res.send({status:"success" , payload:result})
+})
+
+export default router;

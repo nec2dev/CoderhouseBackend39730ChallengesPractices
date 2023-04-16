@@ -1,11 +1,37 @@
-import express from 'express';
+import { Router } from "express";
+import Carts from "../dao/managers/cart.manager.js";
+import Messages from "../dao/managers/message.manager.js";
+import Products from "../dao/managers/product.manager.js";
+import Users from "../dao/managers/user.manager.js";
 
-const router = express.Router();
-router.get('/', (req, res) => {
-    res.render('home');
+const router = Router();
+const cartsManager = new Carts();
+const messagesManager = new Messages();
+const productsManager = new Products();
+const usersManager = new Users();
+
+router.get('/products' , async (req,res) => {
+    let products = await productsManager.getAll();
+    console.log(products);
+    res.render('products' , {products})
 })
-router.get('/realtimeproducts', (req, res) => {
-    res.render('realTimeProducts');
+
+router.get('/carts' , async (req,res) => {
+    let carts = await cartsManager.getAll();
+    console.log(carts);
+    res.render('carts' , {carts})
+})
+
+router.get('/messages' , async (req,res) => {
+    let messages = await messagesManager.getAll();
+    console.log(messages);
+    res.render('chat' , {messages})
+})
+
+router.get('/users' , async (req,res) => {
+    let users = await usersManager.getAll();
+    console.log(users);
+    res.render('chat' , {users})
 })
 
 export default router;
