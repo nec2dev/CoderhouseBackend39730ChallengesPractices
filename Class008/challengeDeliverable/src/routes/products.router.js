@@ -4,20 +4,21 @@ import Products from "../dao/managers/product.manager.js"
 const router = Router();
 const productsManager = new Products();
 
-router.get('/' , async (req,res) => {
+router.get('/', async (req,res) => {
     let products = await productsManager.getAll();
     res.send({status:"success" , payload:products})
 })
 
 router.post('/' , async (req,res) => {
-    const {title,description,price,code,quantity} = req.body;
+    const {title,description,price,thumbnail,code,stock} = req.body;
 
     let newProduct = {
         title,
         description,
         price,
+        thumbnail,
         code,
-        quantity
+        stock
     };
 
     const result = await productsManager.saveProduct(newProduct);
@@ -26,13 +27,14 @@ router.post('/' , async (req,res) => {
 
 router.put('/:pid' , async (req,res) => {
     let id = req.params.pid;
-    const {title,description,price,code,quantity} = req.body;
+    const {title,description,price,thumbnail,code,stock} = req.body;
     let updateProduct = {
         title,
         description,
         price,
+        thumbnail,
         code,
-        quantity
+        stock
     };
     let result = await productsManager.updateProduct(id,updateProduct)
     res.send({status:"success" , payload:result})

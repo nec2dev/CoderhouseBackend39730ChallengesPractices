@@ -2,32 +2,34 @@ import express from 'express';
 import __dirname from './utils.js';
 import mongoose from 'mongoose';
 import handlebars from 'express-handlebars';
-import cartRouter from './routes/carts.router.js';
-import messageRouter from './routes/messages.router.js';
-import productRouter from './routes/products.router.js';
-import userRouter from './routes/users.router.js';
-import viewRouter from './routes/views.router.js';
+import cartsRouter from './routes/carts.router.js';
+import messagesRouter from './routes/messages.router.js';
+import productsRouter from './routes/products.router.js';
+import usersRouter from './routes/users.router.js';
+import viewsRouter from './routes/views.router.js';
 import Messages from "./dao/managers/message.manager.js";
+import { Server } from "socket.io";
 
 const app = express(); 
 const PORT = 8080;
 const server = app.listen(PORT, () => console.log("Server actvated on port: " + PORT));
-const connection = mongoose.connect('mongodb+srv://nahuelezequielcorrea:zzmXziFAu9UoBl5C@cluster0.lq5rpf5.mongodb.net/?retryWrites=true&w=majority');
 const messagesManager = new Messages()
+const io = new Server(server)
+const connection = mongoose.connect('mongodb+srv://nahuelezequielcorrea:zzmXziFAu9UoBl5C@cluster0.lq5rpf5.mongodb.net/?retryWrites=true&w=majority')
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })) 
 app.engine('handlebars', handlebars.engine()) 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })) 
 app.use(express.static(__dirname + '/public'))
-app.use('/', viewRouter)
-app.use('/api/carts', cartRouter)
-app.use('/api/messages', messageRouter)
-app.use('/api/products', productRouter)
-app.use('/api/users', userRouter)
+app.use('/', viewsRouter)
+app.use('/api/carts', cartsRouter)
+app.use('/api/messages', messagesRouter)
+app.use('/api/products', productsRouter)
+app.use('/api/users', usersRouter)
 
-server.on('connection', socket => {
+io.on('connection', socket => {
     console.log("We have a client connected");
     socket.on('authenticated', data => {
         console.log(`username ${data} received`);

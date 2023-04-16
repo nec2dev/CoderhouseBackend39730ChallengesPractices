@@ -1,36 +1,36 @@
-import cartsModel from "../models/carts.model.js";
-import productsModel from "../models/products.model.js";
+import cartModel from "../models/cart.model.js";
+import productModel from "../models/product.model.js";
 export default class Carts {
     constructor() {
         console.log("Working in mongoDB with carts");
     }
 
     getAll = async () => {
-        let carts = await cartsModel.find().lean();
+        let carts = await cartModel.find().lean();
         return carts;
     }
 
     saveCart = async () => {
-        let result = await cartsModel.create({
+        let result = await cartModel.create({
             products: []
         });
         return result;
     }
 
     deleteCart = async (id) => {
-        let result = await cartsModel.findByIdAndDelete(id);
+        let result = await cartModel.findByIdAndDelete(id);
         return result;
     }
 
     addProductToCart = async (cid, pid) => {
         try {
-            const cartFound = await cartsModel.findById(cid);
+            const cartFound = await cartModel.findById(cid);
             if (!cartFound)
                 return {
                     status: 404,
                     error: `Cart with id ${cid} not found`,
                 };
-            const productFound = await productsModel.findById(pid);
+            const productFound = await productModel.findById(pid);
             if (!productFound)
                 return {
                     status: 404,
@@ -40,10 +40,10 @@ export default class Carts {
             if (productIndex != -1) {
                 let updateProducts = cartFound;
                 updateProducts.products[productIndex].quantity++
-                return await cartsModel.findByIdAndUpdate(cid, { products: updateProducts.products })
+                return await cartModel.findByIdAndUpdate(cid, { products: updateProducts.products })
             }
             else {
-                return await cartsModel.findByIdAndUpdate(cid, { $push: { products: { product: pid, quantity: 1 } } })
+                return await cartModel.findByIdAndUpdate(cid, { $push: { products: { product: pid, quantity: 1 } } })
             }
         } catch (err) {
             console.log(err);

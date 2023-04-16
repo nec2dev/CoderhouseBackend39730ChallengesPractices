@@ -3,7 +3,7 @@ import Messages from "../dao/managers/message.manager.js";
 
 const router = Router();
 const messageManager = new Messages();
-router.get('/' , async (req,res) => {
+router.get('/messages' , async (req,res) => {
     let messages = await messageManager.getAll();
     res.send({status:"success" , payload:messages})
 })

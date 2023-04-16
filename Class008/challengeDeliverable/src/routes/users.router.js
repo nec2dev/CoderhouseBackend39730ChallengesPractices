@@ -2,10 +2,10 @@ import { Router } from "express";
 import Users from "../dao/managers/user.manager.js"
 
 const router = Router();
-const usersManager = new Users();
+const userManager = new Users();
 
 router.get('/' , async (req,res) => {
-    let users = await usersManager.getAll();
+    let users = await userManager.getAll();
     res.send({status:"success" , payload:users})
 })
 
@@ -16,7 +16,7 @@ router.post('/' , async (req,res) => {
         last_name,
         email
     };
-    const result = await usersManager.saveUser(newUser);
+    const result = await userManager.saveUser(newUser);
     res.send({status:"success" , payload:result});
 })
 
@@ -28,7 +28,7 @@ router.put('/:pid' , async (req,res) => {
         last_name,
         email
     };
-    let result = await usersManager.updateUser(id, updateUser)
+    let result = await userManager.updateUser(id, updateUser)
     res.send({status:"success" , payload:result})
 })
 
