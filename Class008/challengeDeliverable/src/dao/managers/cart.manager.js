@@ -1,78 +1,52 @@
 import cartsModel from "../models/carts.model.js";
 import productsModel from "../models/products.model.js";
-
-class CartManager {
-    constructor(path) {
-        this.path = path;
+export default class Carts {
+    constructor() {
+        console.log("Working in mongoDB with carts");
     }
 
-    writeFile = async (data) => {
-        try {
-            await fs.promises.writeFile(
-                this.path, JSON.stringify(data)
-            )
-        }
-        catch (err) {
-            console.log(err.message);
-        }
+    getAll = async () => {
+        let carts = await cartsModel.find().lean();
+        return carts;
     }
 
-    getCarts = async () => {
-        try {
-            const objs = await fs.promises.readFile(this.path, 'utf-8');
-            return JSON.parse(objs);
-        }
-        catch (err) {
-            if (err.message.includes('no such file or directory')) return [];
-            else console.log(err.message);
-        }
+    saveCart = async () => {
+        let result = await cartsModel.create({
+            products: []
+        });
+        return result;
     }
 
-    addCart = async () => {
-        const db = await this.getCarts();
+    deleteCart = async (id) => {
+        let result = await cartsModel.findByIdAndDelete(id);
+        return result;
+    }
+
+    addProductToCart = async (cid, pid) => {
         try {
-            if (db.length === 0) {
-                let newId = 1;
-                const newCart = { products: [], id: newId };
-                db.push(newCart);
+            const cartFound = await cartsModel.findById(cid);
+            if (!cartFound)
+                return {
+                    status: 404,
+                    error: `Cart with id ${cid} not found`,
+                };
+            const productFound = await productsModel.findById(pid);
+            if (!productFound)
+                return {
+                    status: 404,
+                    error: `Product with id ${pid} not found`,
+                };
+            let productIndex = cartFound.products.findIndex(p => p.product === pid)
+            if (productIndex != -1) {
+                let updateProducts = cartFound;
+                updateProducts.products[productIndex].quantity++
+                return await cartsModel.findByIdAndUpdate(cid, { products: updateProducts.products })
             }
             else {
-                let newId = Math.max(...db.map(product => product.id)) + 1;
-                const newCart = { products: [], id: newId };
-                db.push(newCart);
+                return await cartsModel.findByIdAndUpdate(cid, { $push: { products: { product: pid, quantity: 1 } } })
             }
-            await this.writeFile(db);
-        }
-        catch (err) {
-            console.log(err.message);
-        }
-    }
-
-    addProductToCart = async (cartId, productId) => {
-        const carts = await this.getCarts();
-        try {
-            let cartIndex = carts.findIndex((cart) => cart.id === cartId);
-            if(cartIndex != -1) {
-                let carts = carts[cartIndex].products.findIndex((p) => p.product === productId); 
-                if(productIndex != -1) {
-                    carts[cartIndex].products[productIndex].quantity++
-                }
-                else {
-                    carts[cartIndex].products.push({
-                        product:productId,
-                        quantity:1
-                    })
-                }
-            }
-            else{
-                console.log("The cart does not exist");
-            }
-            await this.writeFile(carts);
-        }
-        catch (err) {
-            console.log(err.message);
+        } catch (err) {
+            console.log(err);
         }
     }
 }
-
-export default CartManager;
