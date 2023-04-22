@@ -1,11 +1,14 @@
-import mongoose from "mongoose";
+const {Schema, model} = require('mongoose')
 
-const cartsCollection = 'carts';
-const cartsSchema = new mongoose.Schema({
+const cartCollection = 'products';
+const cartSchema = new Schema({
     products:{
         type:Array
+    },
+    id:{
+        type:Number,
+        required:true
     }
 })
-const cartsModel = mongoose.model(cartsCollection , cartsSchema);
 
-export default cartsModel;
+module.exports = model(cartCollection, cartSchema)

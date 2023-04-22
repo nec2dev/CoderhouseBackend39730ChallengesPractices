@@ -1,11 +1,11 @@
 import { Router } from "express";
-import Products from "../dao/managers/product.manager.js"
+import Products from "../dao/managersmdb/product.manager.js"
 
-const router = Router();
-const productsManager = new Products();
+const router = Router()
+const productsManager = new Products()
 
 router.get('/', async (req,res) => {
-    let products = await productsManager.getAll();
+    let products = await productsManager.getAll()
     res.send({status:"success" , payload:products})
 })
 
@@ -22,7 +22,7 @@ router.post('/' , async (req,res) => {
     };
 
     const result = await productsManager.saveProduct(newProduct);
-    res.send({status:"success" , payload:result});
+    res.send({status:"success" , payload:result})
 })
 
 router.put('/:pid' , async (req,res) => {
@@ -41,9 +41,9 @@ router.put('/:pid' , async (req,res) => {
 })
 
 router.delete('/:pid' , async (req,res) => {
-    let id = req.params.pid;
+    let id = req.params.pid
     let result = await productsManager.deleteProduct(id);
     res.send({status:"success" , payload:result})
 })
 
-export default router;
+export default router

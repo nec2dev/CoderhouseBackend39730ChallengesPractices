@@ -1,20 +1,21 @@
-import cartModel from "../models/cart.model.js";
-import productModel from "../models/product.model.js";
-export default class Carts {
+const cartModel = require('../models/cart.model.js') 
+const productModel = require('../models/product.model.js') 
+
+class CartManagerMDB {
     constructor() {
-        console.log("Working in mongoDB with carts");
+        console.log("Working in mongoDB with carts")
     }
 
     getAll = async () => {
-        let carts = await cartModel.find().lean();
-        return carts;
+        let carts = await cartModel.find().lean()
+        return carts
     }
 
     saveCart = async () => {
         let result = await cartModel.create({
             products: []
         });
-        return result;
+        return result
     }
 
     deleteCart = async (id) => {
@@ -29,7 +30,7 @@ export default class Carts {
                 return {
                     status: 404,
                     error: `Cart with id ${cid} not found`,
-                };
+                }
             const productFound = await productModel.findById(pid);
             if (!productFound)
                 return {
@@ -46,7 +47,9 @@ export default class Carts {
                 return await cartModel.findByIdAndUpdate(cid, { $push: { products: { product: pid, quantity: 1 } } })
             }
         } catch (err) {
-            console.log(err);
+            console.log(err)
         }
     }
 }
+
+module.exports = new CartManagerMDB()

@@ -1,8 +1,8 @@
-import { Router } from "express";
-import Carts from "../dao/managers/cart.manager.js";
+import { Router } from "express"
+import Carts from "../dao/managersmdb/cart.manager.js"
 
-const router = Router();
-const cartsManager = new Carts();
+const router = Router()
+const cartsManager = new Carts()
 
 router.get('/' , async (req,res) => {
     let carts = await cartsManager.getAll();
@@ -28,4 +28,4 @@ router.post('/:cid/product/:pid' , async (req,res) => {
     res.send({status:"success" , payload:result});
 })
 
-export default router;
+export default router

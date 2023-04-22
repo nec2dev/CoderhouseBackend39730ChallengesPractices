@@ -5,7 +5,7 @@ const log = document.getElementById('messageLogs');
 Swal.fire({
     title: "Log In:",
     input: "text",
-    text: " Enter your name in the chat",
+    text: "Enter your name in the chat",
     inputValidator: (value) => {
         return !value && 'You need a username'
     },
