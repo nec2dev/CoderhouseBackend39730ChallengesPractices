@@ -1,0 +1,13 @@
+<h1>Products List</h1>
+{{#each products}}
+<p>Product: {{title}} - Price: ${{price}} - Category: {{category}} - Stock: {{stock}}</p>
+<button onclick={addProductToCart("{{_id}}")} >Add to Cart</button>
+{{/each}}
+{{#if hasPrevPage}}
+<a href="/products?page={{prevPage}}"><button>Before</button></a>
+{{/if}}
+{{#if hasNextPage}}
+<a href="/products?page={{nextPage}}"><button>Next</button></a>
+{{/if}}
+
+<script src="../public/js/pages/products.js"></script>
