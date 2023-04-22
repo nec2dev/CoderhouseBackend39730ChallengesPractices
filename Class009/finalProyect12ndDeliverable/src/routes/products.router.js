@@ -2,23 +2,23 @@ import { Router } from "express";
 import Products from "../dao/managers/product.manager.js"
 
 const router = Router()
-const productsManager = new Products()
+const productManager = new Products()
 
 router.get('/', async (req,res) => {
-    let products = await productsManager.getAll()
+    let products = await productManager.getAll()
     res.send({status:"success" , payload:products})
 })
 
 router.post('/' , async (req,res) => {
-    const {title,description,price,thumbnail,code,stock} = req.body;
-
+    const {title,description,price,thumbnail,code,stock,category} = req.body;
     let newProduct = {
         title,
         description,
         price,
         thumbnail,
         code,
-        stock
+        stock,
+        category
     };
 
     const result = await productsManager.saveProduct(newProduct);
@@ -27,22 +27,23 @@ router.post('/' , async (req,res) => {
 
 router.put('/:pid' , async (req,res) => {
     let id = req.params.pid;
-    const {title,description,price,thumbnail,code,stock} = req.body;
+    const {title,description,price,thumbnail,code,stock,category} = req.body;
     let updateProduct = {
         title,
         description,
         price,
         thumbnail,
         code,
-        stock
+        stock,
+        category
     };
-    let result = await productsManager.updateProduct(id,updateProduct)
+    let result = await productManager.updateProduct(id,updateProduct)
     res.send({status:"success" , payload:result})
 })
 
 router.delete('/:pid' , async (req,res) => {
     let id = req.params.pid
-    let result = await productsManager.deleteProduct(id);
+    let result = await productManager.deleteProduct(id);
     res.send({status:"success" , payload:result})
 })
 

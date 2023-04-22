@@ -1,6 +1,10 @@
 import userModel from '../models/user.model.js'
 
-class UserManager {
+export default class UserManager {
+    constructor() {
+        console.log("Working in mongoDB with Users")
+    }
+
     getAll = async () => {
         let users = await userModel.find().lean()
         return users;
@@ -21,5 +25,3 @@ class UserManager {
         return result
     }
 }
-
-module.exports = new UserManager()

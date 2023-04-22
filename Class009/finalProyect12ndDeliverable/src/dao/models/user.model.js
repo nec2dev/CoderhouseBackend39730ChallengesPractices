@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 import mongoosePaginate from "mongoose-paginate-v2"
 
-const userCollection = 'users';
-const userSchema = new Schema({
+const userCollection = 'users'
+const userSchema = new mongoose.Schema({
     first_name:{
         type:String,
         required:true

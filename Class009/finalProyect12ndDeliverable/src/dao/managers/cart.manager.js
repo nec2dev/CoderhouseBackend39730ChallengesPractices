@@ -1,9 +1,8 @@
 import cartModel from '../models/cart.model.js'
 import productModel from '../models/product.model.js'
-
-class CartManager {
+export default class Carts {
     constructor() {
-        console.log("Working in mongoDB with carts")
+        console.log("Working in mongoDB with Carts")
     }
 
     getAll = async () => {
@@ -61,5 +60,3 @@ class CartManager {
         return result;
     }
 }
-
-module.exports = new CartManager()

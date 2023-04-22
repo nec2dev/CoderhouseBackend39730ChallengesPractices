@@ -1,25 +1,24 @@
-import express from "express"
-import handlebars from "express-handlebars"
-import mongoose from "mongoose"
-import __dirname from "./utils/utils.js"
-import { Server } from "socket.io";
-import Messages from "./dao/dbManagers/messages.js"
-import cartsRouter from "./routes/carts.router.js"
-import messagesRouter from "./routes/messages.router.js"
-import productsRouter from "./routes/products.router.js"
-import viewsRouter from "./routes/views.router.js"
-
+import express from 'express'
+import { Server } from "socket.io"
+import __dirname from './utils.js'
+import mongoose from 'mongoose'
+import handlebars from 'express-handlebars'
+import cartsRouter from './routes/carts.router.js'
+import messagesRouter from './routes/messages.router.js'
+import productsRouter from './routes/products.router.js'
+import usersRouter from './routes/users.router.js'
+import viewsRouter from './routes/views.router.js'
+import Messages from "./dao/managers/message.manager.js"
 
 const app = express();
 const PORT = 8080;
 const server = app.listen(PORT, () => console.log("Server activated on port: " + PORT))
-const messagesManager = new Messages()
 const io = new Server(server)
-mongoose.connect('mongodb+srv://nahuelezequielcorrea:zzmXziFAu9UoBl5C@cluster0.lq5rpf5.mongodb.net/?retryWrites=true&w=majority', (error) => {
-    if(error) {
-        console.log("Cannot connect to database: " + error)
-        process.exit()
-    }
+const messagesManager = new Messages()
+mongoose.set('strictQuery', false)
+const connection = mongoose.connect("mongodb+srv://nahuelezequielcorrea:zzmXziFAu9UoBl5C@cluster0.lq5rpf5.mongodb.net/?retryWrites=true&w=majority", {
+    useNewUrlParser:true,
+    useUnifiedTopology:true
 })
 
 app.engine('handlebars', handlebars.engine())

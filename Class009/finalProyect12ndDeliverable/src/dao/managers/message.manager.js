@@ -1,6 +1,6 @@
 import messageModel from '../models/message.model.js' 
 
-class MessageManager{
+export default class MessageManager{
     constructor(){
         console.log("Working in mongoDB with Messages")
     }
@@ -15,5 +15,3 @@ class MessageManager{
         return result;
     }
 }
-
-module.exports = new MessageManager()

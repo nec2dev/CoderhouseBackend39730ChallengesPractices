@@ -1,10 +1,16 @@
 import { Router } from "express"
+import Carts from "../dao/managers/cart.manager.js"
 import Messages from "../dao/managers/message.manager.js"
+import Products from "../dao/managers/product.manager.js"
 import Users from "../dao/managers/user.manager.js"
+import productModel from "../dao/models/product.model.js"
+import cartModel from "../dao/models/cart.model.js"
 
 const router = Router()
-const messagesManager = new Messages()
-const usersManager = new Users()
+const cartManager = new Carts()
+const messageManager = new Messages()
+const productManager = new Products();
+const userManager = new Users()
 
 router.get('/products' , async (req,res) => {
     const {
@@ -14,7 +20,7 @@ router.get('/products' , async (req,res) => {
         category="",
     } = req.query;
     const {docs,hasPrevPage,hasNextPage,nextPage,prevPage} = 
-    await productsModel.paginate({category:{$regex:category}} , {sort:{price:sort}, limit , page , lean:true});
+    await productModel.paginate({category:{$regex:category}}, {sort:{price:sort}, limit, page, lean:true});
     const products = docs;
     res.render('products' , {
         products,
@@ -28,22 +34,28 @@ router.get('/products' , async (req,res) => {
 
 router.get('/carts/:cid' , async (req,res) => {
     let cid = req.params.cid;
-    let cart = await cartsModel.findById(cid).populate("products.product").lean();
+    let cart = await cartModel.findById(cid).populate("products.product").lean();
     let cartProducts = cart.products
     console.log(cartProducts);
     res.render('carts' , {cart, cartProducts})
 })
 
+router.get('/carts' , async (req,res) => {
+    let carts = await cartManager.getAll();
+    console.log(carts);
+    res.render('carts' , {CanvasCaptureMediaStreamTrack})
+})
+
 router.get('/messages' , async (req,res) => {
-    let messages = await messagesManager.getAll();
+    let messages = await messageManager.getAll();
     console.log(messages);
-    res.render('chat' , {messages})
+    res.render('messages' , {messages})
 })
 
 router.get('/users' , async (req,res) => {
-    let users = await usersManager.getAll();
+    let users = await userManager.getAll();
     console.log(users);
-    res.render('chat' , {users})
+    res.render('users' , {users})
 })
 
 export default router;
