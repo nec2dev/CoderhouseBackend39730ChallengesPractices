@@ -6,6 +6,7 @@ const productManager = new Products()
 
 router.get('/', async (req,res) => {
     let products = await productManager.getAll()
+    console.log(products)
     res.send({status:"success" , payload:products})
 })
 
@@ -21,7 +22,7 @@ router.post('/' , async (req,res) => {
         category
     };
 
-    const result = await productsManager.saveProduct(newProduct);
+    const result = await productManager.saveProduct(newProduct);
     res.send({status:"success" , payload:result})
 })
 

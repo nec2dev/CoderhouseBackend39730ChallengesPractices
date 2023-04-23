@@ -6,7 +6,7 @@
         "thumbnail": "./img/001Image.png",
         "code": "A1001",
         "stock": 4096,
-        "id": 1
+        "category": "1"
     },
     {
         "title": "TestItem002",
@@ -15,7 +15,7 @@
         "thumbnail": "./img/002Image.png",
         "code": "A1002",
         "stock": 2048,
-        "id": 2
+        "category": "2"
     },
     {
         "title": "TestItem003",
@@ -24,7 +24,7 @@
         "thumbnail": "./img/003Image.png",
         "code": "A1003",
         "stock": 1024,
-        "id": 3
+        "category": "3"
     },
     {
         "title": "TestItem004",
@@ -33,7 +33,7 @@
         "thumbnail": "./img/004Image.png",
         "code": "A1004",
         "stock": 512,
-        "id": 4
+        "category": "1"
     },
     {
         "title": "TestItem005",
@@ -42,7 +42,7 @@
         "thumbnail": "./img/005Image.png",
         "code": "A1005",
         "stock": 256,
-        "id": 5
+        "category": "1"
     },
     {
         "title": "TestItem006",
@@ -51,7 +51,7 @@
         "thumbnail": "./img/006Image.png",
         "code": "A1006",
         "stock": 4096,
-        "id": 6
+        "category": "2"
     },
     {
         "title": "TestItemUpdated007",
@@ -60,6 +60,6 @@
         "thumbnail": "./img/007Image.png",
         "code": "A1007",
         "stock": 4096,
-        "id": 7
+        "category": "3"
     }
 ]

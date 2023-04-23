@@ -1,4 +1,10 @@
 <h1>Carts List</h1>
- {{#each cartProducts}}    
-<p>Producto: {{product.title}} - Price: ${{product.price}} - Category: {{product.category}} - Stock: {{stock}}</p>      
- {{/each}}
+{{#each carts}}
+  <p>Cart: {{products}}</p>
+  {{#each products}}
+    Products:
+    {{products.product}}
+    - Quantity:
+    {{products.quantity}}
+  {{/each}}
+{{/each}}

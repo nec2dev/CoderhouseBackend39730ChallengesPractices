@@ -32,18 +32,18 @@ router.get('/products' , async (req,res) => {
     });
 })
 
+router.get('/carts' , async (req,res) => {
+    let carts = await cartManager.getAll();
+    console.log(carts);
+    res.render('carts', {carts})
+})
+
 router.get('/carts/:cid' , async (req,res) => {
     let cid = req.params.cid;
     let cart = await cartModel.findById(cid).populate("products.product").lean();
     let cartProducts = cart.products
     console.log(cartProducts);
     res.render('carts' , {cart, cartProducts})
-})
-
-router.get('/carts' , async (req,res) => {
-    let carts = await cartManager.getAll();
-    console.log(carts);
-    res.render('carts' , {CanvasCaptureMediaStreamTrack})
 })
 
 router.get('/messages' , async (req,res) => {
