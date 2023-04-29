@@ -34,4 +34,5 @@ export default class ProductManager {
         let result = await productModel.findByIdAndDelete(id)
         return result
     }
+    
 }

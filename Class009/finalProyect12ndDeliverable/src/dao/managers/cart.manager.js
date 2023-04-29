@@ -65,13 +65,32 @@ export default class Carts {
         return result;
     }
 
-    deleteAllProductsFromCart = async (cid) => {
-        let result = await cartModel.updateOne({_id: cid}, {products: []});
-        return result;
+    deleteAllProdFromCart = async (req, res) => {
+        const cid = req.params.cid;
+        let cart = await cartsManager.getOne(cid);
+        cart.products = [];
+        let result = await cartsManager.updateCart(cid, cart);
+        res.send({ status: "Success", payload: result });
     }
 
-    updateProductFromCart = async (cid, pid, quantity) => {
-        let result = await cartModel.updateOne({_id: cid, "products.product": pid}, {$set: {"products.$.quantity": quantity}});
-        return result;
+    updateProductQuantity = async (req, res) => {
+        let cid = req.params.cid;
+        let pid = req.params.pid;
+        let { quantity } = req.body;
+    
+        let cart = await cartsManager.getOne(cid);
+        let productExist = false;
+        cart.products.forEach(product => {
+            if (product._id == pid) {
+                product.quantity = quantity;
+                productExist = true
+            }
+        })
+        if (productExist === true) {
+            let result = await cartsManager.updateCart(cid, cart);
+            res.send({ status: "Success", payload: result });
+        } else {
+            res.send({ status: 404, payload: "The product does not exist in the cart" });
+        }
     }
 }
