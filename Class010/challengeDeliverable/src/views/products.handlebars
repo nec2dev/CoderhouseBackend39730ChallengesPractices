@@ -1,0 +1,20 @@
+{{#if isLogin}}
+<h1>
+    ¡You're welcome{{user.first_name}} {{user.last_name}}!
+    you have the following role: {{user.rol}}
+</h1>
+<button id="btnLogout">Logout</button>
+{{/if}}
+<h2>Products List</h2>
+{{#each products}}
+<p>Product: {{title}} - Price: ${{price}} - Category: {{category}} - Stock: {{stock}}</p>
+<button onclick={addProductToCart("{{_id}}")} >Add to Cart</button>
+{{/each}}
+{{#if hasPrevPage}}
+<a href="/products?page={{prevPage}}"><button>Before</button></a>
+{{/if}}
+{{#if hasNextPage}}
+<a href="/products?page={{nextPage}}"><button>Next</button></a>
+{{/if}}
+
+<script src="/js/pages/logout.js"></script>

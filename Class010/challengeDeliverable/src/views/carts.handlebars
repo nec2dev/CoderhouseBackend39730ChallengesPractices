@@ -1,0 +1,10 @@
+<h1>Carts List</h1>
+{{#each cartProducts}}
+  <p>Product:
+    {{product.title}}
+    - Price: ${{product.price}}
+    - Category:
+    {{product.category}}
+    - Quantity:
+    {{quantity}}</p>
+{{/each}}

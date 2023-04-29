@@ -6,9 +6,12 @@ import handlebars from "express-handlebars";
 import cartsRouter from "./routes/carts.router.js";
 import messagesRouter from "./routes/messages.router.js";
 import productsRouter from "./routes/products.router.js";
-import usersRouter from "./routes/users.router.js";
 import viewsRouter from "./routes/views.router.js";
 import Messages from "./dao/managers/message.manager.js";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import sessionsRouter from "./routes/sessions.router.js";
+import MongoStore from "connect-mongo";
 
 const app = express();
 const PORT = 8080;
@@ -25,6 +28,21 @@ const connection = mongoose.connect(
   }
 );
 
+mongoose.set("strictQuery", false);
+app.use(cookieParser());
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl:
+        "mongodb+srv://nahuelezequielcorrea:zzmXziFAu9UoBl5C@cluster0.lq5rpf5.mongodb.net/?retryWrites=true&w=majority",
+      mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
+      ttl: 20,
+    }),
+    secret: "secretCode",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
@@ -35,7 +53,7 @@ app.use("/", viewsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/messages", messagesRouter);
 app.use("/api/products", productsRouter);
-app.use("/api/users", usersRouter);
+app.use("/api/session", sessionsRouter);
 
 io.on("connection", (socket) => {
   console.log("We have a client connected");

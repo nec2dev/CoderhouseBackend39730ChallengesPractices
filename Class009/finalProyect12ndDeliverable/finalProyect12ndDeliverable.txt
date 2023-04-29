@@ -6,23 +6,23 @@ además de agregar algunos endpoints nuevos a tu ecommerce
 Profesionalizando la BD
 
 Objetivos generales
-    Contarás con Mongo como sistema de persistencia principal
-    Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.
+    ✓ Contarás con Mongo como sistema de persistencia principal
+    ✓ Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.
 
 Objetivos específicos
-    Profesionalizar las consultas de productos con filtros, paginación y ordenamientos
-    Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.
+    ✓ Profesionalizar las consultas de productos con filtros, paginación y ordenamientos
+    ✓ Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.
 
 Formato
-    Link al repositorio de Github, sin la carpeta de node_modules
+    ✓ Link al repositorio de Github, sin la carpeta de node_modules
 
 Sugerencias
-    Permitir comentarios en el archivo
-    La lógica del negocio que ya tienes hecha no debería cambiar, sólo su persistencia. 
-    Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido. 
+    ✓ Permitir comentarios en el archivo
+    ✓ La lógica del negocio que ya tienes hecha no debería cambiar, sólo su persistencia. 
+    ✓ Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido. 
 
 Se debe entregar
-    Con base en nuestra implementación actual de productos, modificar el método GET / 
+    ✓ Con base en nuestra implementación actual de productos, modificar el método GET / 
     para que cumpla con los siguientes puntos:
         Deberá poder recibir por query params un limit (opcional), una page (opcional), 
         un sort (opcional) y un query (opcional)
@@ -36,7 +36,7 @@ Se debe entregar
             en caso de no recibir sort, no realizar ningún ordenamiento
     
     
-    El método GET deberá devolver un objeto con el siguiente formato:
+    ✓ El método GET deberá devolver un objeto con el siguiente formato:
         {
 	        status:success/error
             payload: Resultado de los productos solicitados
@@ -50,10 +50,10 @@ Se debe entregar
             nextLink: Link directo a la página siguiente (null si hasNextPage=false)
         }
 
-    Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder 
+    ✓ Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder 
     realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.
 
-    Se debe entregar
+    ✓ Se debe entregar
         Además, agregar al router de carts los siguientes endpoints:
             DELETE api/carts/:cid/products/:pid deberá eliminar del carrito el producto 
             seleccionado.
