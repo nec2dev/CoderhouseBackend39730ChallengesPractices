@@ -15,6 +15,11 @@ export default class ProductManager {
         return products
     }
 
+    getProductById = async (id) => {
+        let result = await productModel.findById(id)
+        return result
+    }
+
     saveProduct = async (product) => {
         let result = await productModel.create(product)
         return result
