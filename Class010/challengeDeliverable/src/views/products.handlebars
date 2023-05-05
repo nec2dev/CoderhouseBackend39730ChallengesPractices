@@ -7,8 +7,8 @@
 {{/if}}
 <h2>Products List</h2>
 {{#each products}}
-<p>Product: {{title}} - Price: ${{price}} - Category: {{category}} - Stock: {{stock}}</p>
-<button onclick={addProductToCart("{{_id}}")} >Add to Cart</button>
+<p>Product: {{title}} - Price: ${{price}} - Category: {{category}} - Stock: {{stock}} - Id: {{_id}}</p>
+<button onclick={addProductToCart({{_id}})} >Add to Cart</button>
 {{/each}}
 {{#if hasPrevPage}}
 <a href="/products?page={{prevPage}}"><button>Before</button></a>
@@ -18,3 +18,4 @@
 {{/if}}
 
 <script src="/js/pages/logout.js"></script>
+

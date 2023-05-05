@@ -35,11 +35,6 @@ const productSchema = new mongoose.Schema({
     status: {
         type: Boolean,
         default: true
-    },
-    id: {
-        type: String,
-        required: true,
-        unique: true
     }
 })
 productSchema.plugin(mongoosePaginate);

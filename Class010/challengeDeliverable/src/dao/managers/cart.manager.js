@@ -1,97 +1,85 @@
-import cartModel from '../models/cart.model.js'
-import productModel from '../models/product.model.js'
+import cartModel from "../models/cart.model.js";
+import productModel from "../models/product.model.js";
 
-export default class Carts {
-    constructor() {
-        console.log("Working in mongoDB with Carts")
-    }
+export default class CartManager {
+  constructor() {
+    console.log("Working in mongoDB with Carts");
+  }
 
-    getAll = async () => {
-        let carts = await cartModel.find().lean()
-        return carts
-    }
+  createCart = async () => {
+    const result = await cartModel.create({
+      products: [],
+    });
+    return result;
+  };
 
-    getOne = async (id) => {
-        let cart = await cartModel.findOne({_id: id}).lean();
-        return cart;
-    }
+  getCarts = async () => {
+    const carts = await cartModel.find().lean().populate("products.product");
+    return carts;
+  };
 
-    saveCart = async () => {
-        let result = await cartModel.create({
-            products: []
+  getCartById = async (cid) => {
+    let cartById = await cartModel
+      .findOne({ _id: cid })
+      .populate("products.product")
+      .lean();
+    return cartById;
+  };
+
+  updateCart = async (cid, cart) => {
+    let result = await cartModel.updateOne({ _id: cid }, cart);
+    return result;
+  };
+
+  deleteCart = async (id) => {
+    let result = await cartModel.findByIdAndDelete(id);
+    return result;
+  };
+
+  addProductToCart = async (cid, pid, qty) => {
+    try {
+      const cartFound = await cartModel.findById({ _id: cid });
+      if (!cartFound)
+        return {
+          status: 404,
+          error: `Cart with id ${cid} not found`,
+        };
+      const productFound = await productModel.findById({ _id: pid });
+      if (!productFound)
+        return {
+          status: 404,
+          error: `Product with id ${pid} not found`,
+        };
+      let productIndex = cartFound.products.findIndex((p) => p.product === pid);
+      if (productIndex != -1) {
+        let updateProducts = cartFound;
+        updateProducts.products[productIndex].quantity++;
+        return await cartModel.findByIdAndUpdate(cid, {
+          products: updateProducts.products,
         });
-        return result
+      } else {
+        return await cartModel.findByIdAndUpdate(cid, {
+          $push: { products: { product: pid, quantity: qty } },
+        });
+      }
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    deleteCart = async (id) => {
-        let result = await cartModel.findByIdAndDelete(id);
-        return result;
-    }
+  deleteProductFromCart = async (cid, pid) => {
+    let result = await cartModel.updateCart(
+      { _id: cid },
+      { $pull: { products: { product: pid } } }
+    );
+    return result;
+  };
 
-    addProductToCart = async (cid, pid) => {
-        try {
-            const cartFound = await cartModel.findById(cid);
-            if (!cartFound)
-                return {
-                    status: 404,
-                    error: `Cart with id ${cid} not found`,
-                }
-            const productFound = await productModel.findById(pid);
-            if (!productFound)
-                return {
-                    status: 404,
-                    error: `Product with id ${pid} not found`,
-                };
-            let productIndex = cartFound.products.findIndex(p => p.product === pid)
-            if (productIndex != -1) {
-                let updateProducts = cartFound;
-                updateProducts.products[productIndex].quantity++
-                return await cartModel.findByIdAndUpdate(cid, { products: updateProducts.products })
-            }
-            else {
-                return await cartModel.findByIdAndUpdate(cid, { $push: { products: { product: pid, quantity: 1 } } })
-            }
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    updateCart = async(cid, cart) => {
-        let result = await cartModel.updateOne({_id: cid}, cart);
-        return result;
-    }
-
-    deleteProductFromCart = async (cid, pid) => {
-        let result = await cartModel.updateOne({_id: cid}, {$pull: {products: {product: pid}}});
-        return result;
-    }
-
-    deleteAllProdFromCart = async (req, res) => {
-        const cid = req.params.cid;
-        let cart = await cartsManager.getOne(cid);
-        cart.products = [];
-        let result = await cartsManager.updateCart(cid, cart);
-        res.send({ status: "Success", payload: result });
-    }
-
-    updateProductQuantity = async (req, res) => {
-        let cid = req.params.cid;
-        let pid = req.params.pid;
-        let { quantity } = req.body;
-    
-        let cart = await cartsManager.getOne(cid);
-        let productExist = false;
-        cart.products.forEach(product => {
-            if (product._id == pid) {
-                product.quantity = quantity;
-                productExist = true
-            }
-        })
-        if (productExist === true) {
-            let result = await cartsManager.updateCart(cid, cart);
-            res.send({ status: "Success", payload: result });
-        } else {
-            res.send({ status: 404, payload: "The product does not exist in the cart" });
-        }
-    }
+  emptyCart = async (cid) => {
+    let result = await cartModel.updateCart(
+      { _id: cid },
+      { $set: { products: [] } }
+    );
+    return result;
+  };
 }

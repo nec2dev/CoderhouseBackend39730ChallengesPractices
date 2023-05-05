@@ -1,0 +1,6 @@
+Solamente faltaría agregar el método "getProductById".
+añadir sólo 2 métodos: 
+    uno encargado de eliminar todos los productos de un carrito en específico, 
+    y otro que nos permita solamente modificar la cantidad ( "quantity" ) de un producto en específico, 
+    recibiendo un número ( nuevo "quantity" ) enviado por body.
+

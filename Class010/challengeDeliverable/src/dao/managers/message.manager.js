@@ -1,17 +1,17 @@
-import messageModel from '../models/message.model.js' 
+import messageModel from "../models/message.model.js";
 
-export default class MessageManager{
-    constructor(){
-        console.log("Working in mongoDB with Messages")
-    }
+export default class MessageManager {
+  constructor() {
+    console.log("Working in mongoDB with Messages");
+  }
 
-    getAll = async() => {
-        let messages = await messageModel.find().lean()
-        return messages;
-    }
+  createMessage = async (message) => {
+    let result = await messageModel.create(message);
+    return result;
+  };
 
-    saveMessage = async(message) => {
-        let result = await messageModel.create(message)
-        return result;
-    }
+  getMessages = async () => {
+    let messages = await messageModel.find().lean();
+    return messages;
+  };
 }

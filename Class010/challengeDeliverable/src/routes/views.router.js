@@ -1,14 +1,30 @@
 import { Router } from "express";
-import Carts from "../dao/managers/cart.manager.js";
-import Messages from "../dao/managers/message.manager.js";
-import Products from "../dao/managers/product.manager.js";
+import CartManager from "../dao/managers/cart.manager.js";
+import MessageManager from "../dao/managers/message.manager.js";
+import ProductManager from "../dao/managers/product.manager.js";
 import productModel from "../dao/models/product.model.js";
 import cartModel from "../dao/models/cart.model.js";
 
 const router = Router();
-const cartManager = new Carts();
-const messageManager = new Messages();
-const productManager = new Products();
+const cartManager = new CartManager();
+const messageManager = new MessageManager();
+const productManager = new ProductManager();
+
+router.get("/", async (req, res) => {
+  const isLogin = req.session.user ? true : false;
+  const user = req.session.user;
+  const { sort, category = "" } = req.query;
+  const { docs } = await productModel.paginate(
+    { category: { $regex: category } },
+    { sort: { price: sort }, lean: true }
+  );
+  const products = docs;
+  res.render("products", {
+    isLogin,
+    user,
+    products,
+  });
+});
 
 router.get("/products", async (req, res) => {
   const isLogin = req.session.user ? true : false;
@@ -33,16 +49,31 @@ router.get("/products", async (req, res) => {
   });
 });
 
+router.get("/product/:pid", async (req, res) => {
+  const pid = req.params.pid;
+  const product = await productManager.getProductById({ _id: pid });
+  const productRender = product[0];
+  console.log(productRender);
+  console.log(product);
+  return res.render("product", { productRender });
+});
+
+router.get("/carts", async (req, res) => {
+  let carts = await cartManager.getCarts();
+  console.log(carts);
+  res.render("carts", { carts });
+});
+
 router.get("/carts/:cid", async (req, res) => {
   let cid = req.params.cid;
   let cart = await cartModel.findById(cid).populate("products.product").lean();
-  let cartProducts = cart.products;
+  let cartProducts = cart.Products;
   console.log(cartProducts);
   res.render("carts", { cart, cartProducts });
 });
 
 router.get("/messages", async (req, res) => {
-  let messages = await messagesManager.getAll();
+  let messages = await messageManager.getMessages();
   console.log(messages);
   res.render("messages", { messages });
 });

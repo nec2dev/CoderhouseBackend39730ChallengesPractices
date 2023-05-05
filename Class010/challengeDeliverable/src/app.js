@@ -28,7 +28,7 @@ const connection = mongoose.connect(
   }
 );
 
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", true);
 app.use(cookieParser());
 app.use(
   session({
@@ -51,8 +51,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use("/", viewsRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/api/carts/:cid", cartsRouter);
 app.use("/api/messages", messagesRouter);
 app.use("/api/products", productsRouter);
+app.use("/api/products/:pid", productsRouter);
 app.use("/api/session", sessionsRouter);
 
 io.on("connection", (socket) => {
