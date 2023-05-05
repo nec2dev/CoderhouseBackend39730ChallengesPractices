@@ -6,7 +6,6 @@ import handlebars from "express-handlebars";
 import cartsRouter from "./routes/carts.router.js";
 import messagesRouter from "./routes/messages.router.js";
 import productsRouter from "./routes/products.router.js";
-import usersRouter from "./routes/users.router.js";
 import viewsRouter from "./routes/views.router.js";
 import Messages from "./dao/managers/message.manager.js";
 
@@ -35,7 +34,6 @@ app.use("/", viewsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/messages", messagesRouter);
 app.use("/api/products", productsRouter);
-app.use("/api/users", usersRouter);
 
 io.on("connection", (socket) => {
   console.log("We have a client connected");
@@ -45,11 +43,11 @@ io.on("connection", (socket) => {
   });
   socket.on("message", async (data) => {
     console.log(data);
-    await messagesManager.saveMessage({
+    await messagesManager.createMessage({
       user: data.user,
       message: data.message,
     });
-    const logs = await messagesManager.getAll();
+    const logs = await messagesManager.getMessages();
     io.emit("log", { logs });
   });
 });

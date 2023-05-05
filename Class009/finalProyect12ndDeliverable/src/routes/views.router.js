@@ -11,8 +11,6 @@ const messageManager = new MessageManager();
 const productManager = new ProductManager();
 
 router.get("/", async (req, res) => {
-  const isLogin = req.session.user ? true : false;
-  const user = req.session.user;
   const { sort, category = "" } = req.query;
   const { docs } = await productModel.paginate(
     { category: { $regex: category } },
@@ -20,15 +18,11 @@ router.get("/", async (req, res) => {
   );
   const products = docs;
   res.render("products", {
-    isLogin,
-    user,
     products,
   });
 });
 
 router.get("/products", async (req, res) => {
-  const isLogin = req.session.user ? true : false;
-  const user = req.session.user;
   const { page = 1, limit = 5, sort, category = "" } = req.query;
   const { docs, hasPrevPage, hasNextPage, nextPage, prevPage } =
     await productModel.paginate(
@@ -38,8 +32,6 @@ router.get("/products", async (req, res) => {
 
   const products = docs;
   res.render("products", {
-    isLogin,
-    user,
     products,
     hasPrevPage,
     hasNextPage,
