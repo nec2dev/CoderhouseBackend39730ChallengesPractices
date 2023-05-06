@@ -4,7 +4,7 @@ import ProductManager from "../dao/managers/product.manager.js";
 
 const router = Router();
 const cartManager = new CartManager();
-const productManager = new Products();
+const productManager = new ProductManager();
 
 router.post("/", async (req, res) => {
   const cart = { product: [] };

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import passport from "passport";
 import userModel from "../dao/models/user.model.js";
 
 const router = Router();
@@ -16,36 +17,40 @@ router.get("/failregister", async (req, res) => {
   res.send({ status: 500, error: "registration failed" });
 });
 
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  if (email == "adminCoder@coder.com" && password == "adminCod3r123") {
+router.post(
+  "/login",
+  passport.authenticate("login", { failureRedirect: "/faillogin" }),
+  async (req, res) => {
+    const { email, password } = req.body;
+    if (email == "adminCoder@coder.com" && password == "adminCod3r123") {
+      req.session.user = {
+        id: "adminCoder",
+        first_name: "Coder",
+        last_name: "Admin",
+        email: email,
+        rol: "admin",
+      };
+      return res.send({ status: "success", message: "logueado" });
+    }
+    if (!email || !password)
+      return res
+        .status(400)
+        .send({ status: "error", error: "Some values are incompletes" });
+    const user = await userModel.findOne({ email, password });
+    if (!user)
+      return res
+        .status(400)
+        .send({ status: "error", error: "email or password invalid" });
     req.session.user = {
-      id: "adminCoder",
-      first_name: "Coder",
-      last_name: "Admin",
-      email: email,
-      rol: "admin",
+      id: user._id,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      rol: user.rol,
     };
-    return res.send({ status: "success", message: "logueado" });
+    res.send({ status: "success", message: "logueado" });
   }
-  if (!email || !password)
-    return res
-      .status(400)
-      .send({ status: "error", error: "Some values are incompletes" });
-  const user = await userModel.findOne({ email, password });
-  if (!user)
-    return res
-      .status(400)
-      .send({ status: "error", error: "email or password invalid" });
-  req.session.user = {
-    id: user._id,
-    email: user.email,
-    first_name: user.first_name,
-    last_name: user.last_name,
-    rol: user.rol,
-  };
-  res.send({ status: "success", message: "logueado" });
-});
+);
 
 router.get("/faillogin", async (req, res) => {
   console.log("Login failed");

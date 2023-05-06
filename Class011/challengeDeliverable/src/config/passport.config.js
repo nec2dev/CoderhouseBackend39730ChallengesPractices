@@ -1,8 +1,8 @@
 import passport from "passport";
 import local from "passport-local";
+import userService from "passport-github2";
 import userModel from "../dao/models/user.model.js";
 import { createHash, isValidPassword } from "../utils.js";
-import userService from "passport-github2";
 
 const localStrategy = local.Strategy;
 const initPassport = () => {
@@ -15,7 +15,7 @@ const initPassport = () => {
         try {
           let user = await userModel.findOne({ email: username });
           if (user) {
-            console.log("Usuario ya existe");
+            console.log("User already exists");
             return done(null, false);
           }
           const result = {
@@ -29,7 +29,7 @@ const initPassport = () => {
           let newUser = await userModel.create(result);
           return done(null, newUser);
         } catch (error) {
-          return done("Error al obtener el ususario" + error);
+          return done("Error getting user" + error);
         }
       }
     )
@@ -49,14 +49,14 @@ const initPassport = () => {
         try {
           const user = await userModel.findOne({ email: username });
           if (!user) {
-            console.log("Usuario no existe");
+            console.log("user does not exist");
             return done(null, false);
           }
           if (!isValidPassword(user, password)) return done(null, false);
 
           return done(null, user);
         } catch (error) {
-          return done("Error al obtener el ususario" + error);
+          return done("Error getting user" + error);
         }
       }
     )
@@ -76,10 +76,10 @@ const initPassport = () => {
           if (!user) {
             let newUser = {
               first_name: profile._json.name,
-              last_name: "Perez",
+              last_name: "Doe",
               age: 18,
               email: profile._json.login + "@gmail.com",
-              password: "123",
+              password: "123456",
             };
             let result = await userModel.create(newUser);
             done(null, result);
