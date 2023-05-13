@@ -4,7 +4,6 @@ import userManager from "../dao/managers/user.manager.js";
 import userService from "passport-github2";
 import userModel from "../dao/models/user.model.js";
 import { createHash, isValidPassword } from "../utils.js";
-import UserManager from "../dao/managers/user.manager.js";
 
 const localStrategy = local.Strategy;
 const userManager = new userManager();
