@@ -1,5 +1,6 @@
 import passport from "passport";
 import local from "passport-local";
+import cartManager from "../dao/managers/cart.manager.js";
 import userManager from "../dao/managers/user.manager.js";
 import userService from "passport-github2";
 import userModel from "../dao/models/user.model.js";
@@ -7,6 +8,7 @@ import { createHash, isValidPassword } from "../utils.js";
 
 const localStrategy = local.Strategy;
 const userManager = new userManager();
+const cartManager = new cartManager();
 const initPassport = async () => {
   passport.use(
     "register",
