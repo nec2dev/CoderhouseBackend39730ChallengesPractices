@@ -7,11 +7,9 @@ export default class CartManager {
   }
 
   createCart = async () => {
-    const result = await cartModel.create({
-      products: [],
-    });
-    return result;
-  };
+    const carts = await cartModel.find().lean().populate('user');
+        return carts;
+    }
 
   getCarts = async () => {
     const carts = await cartModel.find().lean().populate("products.product");
@@ -19,11 +17,11 @@ export default class CartManager {
   };
 
   getCartById = async (cid) => {
-    let cartById = await cartModel
+    const cartExist = await cartModel
       .findOne({ _id: cid })
       .populate("products.product")
       .lean();
-    return cartById;
+    return cart;
   };
 
   updateCart = async (cid, cart) => {
@@ -33,6 +31,14 @@ export default class CartManager {
 
   deleteCart = async (id) => {
     let result = await cartModel.findByIdAndDelete(id);
+    return result;
+  };
+
+  deleteProductFromCart = async (cid, pid) => {
+    let result = await cartModel.updateCart(
+      { _id: cid },
+      { $pull: { products: { product: pid } } }
+    );
     return result;
   };
 
@@ -65,14 +71,6 @@ export default class CartManager {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  deleteProductFromCart = async (cid, pid) => {
-    let result = await cartModel.updateCart(
-      { _id: cid },
-      { $pull: { products: { product: pid } } }
-    );
-    return result;
   };
 
   emptyCart = async (cid) => {

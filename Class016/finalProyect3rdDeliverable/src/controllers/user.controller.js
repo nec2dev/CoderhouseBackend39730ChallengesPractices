@@ -4,16 +4,7 @@ import CartManager from "../dao/managers/cart.manager.js";
 const userManager = new UserManager();
 const cartManager = new CartManager();
 
-const getAll = async (req, res) => {
-  let users = await userManager.getAll();
-  if (!users)
-    return res
-      .status(500)
-      .send({ status: "error", error: "Can not bring the information" });
-  res.send({ status: "success", payload: users });
-};
-
-const saveUser = async (req, res) => {
+const createUser = async (req, res) => {
   const { first_name, last_name, email, age, cart } = req.body;
   let result = await userManager.saveUser({
     first_name,
@@ -22,6 +13,41 @@ const saveUser = async (req, res) => {
     age,
     cart,
   });
+  res.send({ status: "success", payload: result });
+};
+
+const getUsers = async (req, res) => {
+  let users = await userManager.getAll();
+  if (!users)
+    return res
+      .status(500)
+      .send({ status: "error", error: "Can not bring the information" });
+  res.send({ status: "success", payload: users });
+};
+
+const getUserById = async (req, res) => {
+  let id = req.params.uid;
+  let user = await userManager.getById(id);
+  if (!user)
+    return res.status(404).send({ status: "error", error: "User not found" });
+  res.send({ status: "success", payload: user });
+};
+
+const updateUser = async (req, res) => {
+  let id = req.params.uid;
+  const { first_name, last_name, email, age, cart } = req.body;
+  let updateUser = { first_name, last_name, email, age, cart };
+  let result = await userManager.updateUser(id, updateUser);
+  if (!result)
+    return res.status(404).send({ status: "error", error: "User not found" });
+  res.send({ status: "success", payload: result });
+};
+
+const deleteUser = async (req, res) => {
+  let id = req.params.uid;
+  let result = await userManager.deleteUser(id);
+  if (!result)
+    return res.status(404).send({ status: "error", error: "User not found" });
   res.send({ status: "success", payload: result });
 };
 
@@ -38,7 +64,6 @@ const addUserToCart = async (req, res) => {
     return res
       .status(404)
       .send({ status: "error", error: "User not found in this cart" });
-
   user.cart.push(cart._id);
   cart.user.push(user._id);
   await userManager.updateUser(uid, user);
@@ -47,7 +72,10 @@ const addUserToCart = async (req, res) => {
 };
 
 export default {
-  getAll,
-  saveUser,
+  createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
   addUserToCart,
 };

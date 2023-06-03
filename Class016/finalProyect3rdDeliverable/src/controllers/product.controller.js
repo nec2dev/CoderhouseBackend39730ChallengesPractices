@@ -2,16 +2,9 @@ import ProductManager from "../dao/managers/product.manager.js";
 
 const productManager = new ProductManager();
 
-const getAll = async (req, res) => {
-  let products = await productManager.getAll();
-  console.log(products);
-  res.send({ status: "success", payload: products });
-};
-
-const saveProduct = async (req, res) => {
+const createProduct = async (req, res) => {
   const { title, description, price, code, quantity, category, thumbnail } =
     req.body;
-
   let newProduct = {
     title,
     description,
@@ -21,9 +14,19 @@ const saveProduct = async (req, res) => {
     category,
     thumbnail,
   };
-
   const result = await productManager.saveProduct(newProduct);
   res.send({ status: "success", payload: result });
+};
+
+const getProducts = async (req, res) => {
+  let products = await productManager.getAll();
+  res.send({ status: "success", payload: products });
+};
+
+const getProductById = async (req, res) => {
+  let id = req.params.pid;
+  let product = await productManager.getOne(id);
+  res.send({ status: "success", payload: product });
 };
 
 const updateProduct = async (req, res) => {
@@ -50,8 +53,9 @@ const deleteProduct = async (req, res) => {
 };
 
 export default {
-  getAll,
-  saveProduct,
+  createProduct,
+  getProducts,
+  getProductById,
   updateProduct,
   deleteProduct,
 };

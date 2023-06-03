@@ -48,14 +48,14 @@ const failLogin = async (req, res) => {
   res.status(500).send({ error: "Failed" });
 };
 
-const authGithub = () =>
+const authGitHub = () =>
   passport.authenticate(
     "github",
     { scope: ["user:email"] },
     async (req, res) => {}
   );
 
-const failAuthGithub = () => {
+const failAuthGitHub = () => {
   passport.authenticate("github", { failureRedirect: "/login" }),
     async (req, res) => {
       (req.session.user = req.user), res.redirect("/");
@@ -67,6 +67,6 @@ export default {
   failRegister,
   login,
   failLogin,
-  authGithub,
-  failAuthGithub,
+  authGitHub,
+  failAuthGitHub,
 };
