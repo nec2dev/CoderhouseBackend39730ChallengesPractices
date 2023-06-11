@@ -1,5 +1,5 @@
 import UserManager from "../../../examples/dto/user.dto.js";
-import CartManager from "../repositories/cart.repository";
+import CartManager from "../../../examples/repositories/cart.repository.js";
 
 const userManager = new UserManager();
 const cartManager = new CartManager();

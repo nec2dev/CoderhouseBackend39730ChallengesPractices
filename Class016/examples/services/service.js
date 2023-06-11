@@ -5,7 +5,7 @@ const {
   SessionDAO,
   TicketDAO,
   UserDAO,
-} = require("../dao/factory.js");
+} = require("../../finalProyect3rdDeliverable/src/dao/factory.js");
 
 const CartRepository = require("../repositories/cart.repository.js");
 const MessageRepository = require("../repositories/message.repository.js");
