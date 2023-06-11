@@ -1,8 +1,9 @@
-import userModel from "../models/user.model.js";
+const Repository = require("./repository.js");
 
-export default class UserManager {
-  constructor() {
-    console.log("Working in mongoDB with Products");
+class UserRepository extends Repository {
+  constructor(dao) {
+    console.log("Working in mongoDB with users");
+    super(dao);
   }
 
   createUser = async (user) => {
@@ -34,3 +35,5 @@ export default class UserManager {
     return result;
   };
 }
+
+module.exports = UserRepository;

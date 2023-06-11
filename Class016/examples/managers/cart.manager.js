@@ -1,5 +1,5 @@
-import cartModel from "../models/cart.model.js";
-import productModel from "../models/product.model.js";
+import cartModel from "../mongo/models/cart.model.js";
+import productModel from "../mongo/models/product.model.js";
 
 export default class CartManager {
   constructor() {
@@ -7,9 +7,9 @@ export default class CartManager {
   }
 
   createCart = async () => {
-    const carts = await cartModel.find().lean().populate('user');
-        return carts;
-    }
+    const carts = await cartModel.find().lean().populate("user");
+    return carts;
+  };
 
   getCarts = async () => {
     const carts = await cartModel.find().lean().populate("products.product");

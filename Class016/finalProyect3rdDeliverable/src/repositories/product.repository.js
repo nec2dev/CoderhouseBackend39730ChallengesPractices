@@ -1,9 +1,7 @@
-import productModel from "../models/product.model.js";
+const Repository = require("./repository.js")
 
-export default class ProductManager {
-  constructor() {
-    console.log("Working in mongoDB with Products");
-  }
+class ProductRepository extends Repository {
+    constructor(dao){ super(dao) }
 
   createProduct = async (product) => {
     let result = await productModel.create(product);
@@ -34,3 +32,5 @@ export default class ProductManager {
     return result;
   };
 }
+
+module.exports = ProductRepository

@@ -1,5 +1,5 @@
-import UserManager from "../dao/managers/user.manager.js";
-import CartManager from "../dao/managers/cart.manager.js";
+import UserManager from "../../../examples/dto/user.dto.js";
+import CartManager from "../repositories/cart.repository";
 
 const userManager = new UserManager();
 const cartManager = new CartManager();
@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-  let users = await userManager.getAll();
+  let users = await userManager.getUsers();
   if (!users)
     return res
       .status(500)
@@ -27,7 +27,7 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   let id = req.params.uid;
-  let user = await userManager.getById(id);
+  let user = await userManager.getUserById(id);
   if (!user)
     return res.status(404).send({ status: "error", error: "User not found" });
   res.send({ status: "success", payload: user });
@@ -53,10 +53,10 @@ const deleteUser = async (req, res) => {
 
 const addUserToCart = async (req, res) => {
   const { uid, cid } = req.params;
-  const cart = await cartManager.getOne(cid);
+  const cart = await cartManager.getCartById(cid);
   if (!cart)
     return res.status(404).send({ status: "error", error: "Cart not found" });
-  const user = await userManager.getById({ _id: uid });
+  const user = await userManager.getUserById({ _id: uid });
   if (!user)
     return res.status(404).send({ status: "error", error: "User not found" });
   let cartExist = user.cart.some((c) => c._id.toString() === cid);

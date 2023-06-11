@@ -1,9 +1,7 @@
-import ticketModel from "../models/ticket.model.js";
+const Repository = require("./repository.js")
 
-export default class Tickets {
-  constructor() {
-    console.log("Working in mongoDB with tickets");
-  }
+class TicketRepository extends Repository {
+    constructor(dao){ super(dao) }
 
   createTicket = async (ticket) => {
     try {
@@ -66,3 +64,5 @@ export default class Tickets {
     }
   };
 }
+
+module.exports = TicketRepository

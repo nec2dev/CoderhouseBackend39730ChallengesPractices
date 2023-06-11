@@ -1,5 +1,5 @@
-import CartManager from "../dao/managers/cart.manager.js";
-import ProductManager from "../dao/managers/product.manager.js";
+import CartManager from "../dao/mongo/cart.mongo.js";
+import ProductManager from "../dao/mongo/product.mongo.js";
 
 const cartManager = new CartManager();
 const productManager = new ProductManager();
@@ -140,6 +140,11 @@ const addProductToCart = async (req, res) => {
   res.send({ status: "success", payload: result });
 };
 
+const saveCart = async (req, res) => {
+  const { products, user } = req.body;
+  let newCart = { products, nuser };
+};
+
 export default {
   createCart,
   getCarts,
@@ -151,4 +156,5 @@ export default {
   deleteProdFromCart,
   deleteAllProdFromCart,
   addProductToCart,
+  saveCart,
 };

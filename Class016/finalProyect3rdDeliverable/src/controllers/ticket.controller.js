@@ -1,5 +1,5 @@
-import TicketManager from "../dao/managers/ticket.manager.js";
-import UserManager from "../dao/managers/user.manager.js";
+import TicketManager from "../dao/mongo/ticket.mongo.js";
+import UserManager from "../dao/mongo/user.mongo.js";
 
 const ticketManager = new TicketManager();
 const userManager = new UserManager();

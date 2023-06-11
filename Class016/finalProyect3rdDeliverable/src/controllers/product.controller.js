@@ -1,4 +1,4 @@
-import ProductManager from "../dao/managers/product.manager.js";
+import ProductManager from "../dao/mongo/product.mongo.js";
 
 const productManager = new ProductManager();
 
@@ -52,10 +52,27 @@ const deleteProduct = async (req, res) => {
   res.send({ status: "success", payload: result });
 };
 
+const saveProduct = async (req, res) => {
+  const { title, description, price, code, quantity, category, thumbnail } =
+    req.body;
+  let newProduct = {
+    title,
+    description,
+    price,
+    code,
+    quantity,
+    category,
+    thumbnail,
+  };
+  const result = await productManager.saveProduct(newProduct);
+  res.send({ status: "success", payload: result });
+};
+
 export default {
   createProduct,
   getProducts,
   getProductById,
   updateProduct,
   deleteProduct,
+  saveProduct,
 };
