@@ -142,7 +142,9 @@ const addProductToCart = async (req, res) => {
 
 const saveCart = async (req, res) => {
   const { products, user } = req.body;
-  let newCart = { products, nuser };
+  let newCart = { products, user };
+  const result = await cartManager.saveCart(newCart);
+  res.send({ status: "success", payload: result });
 };
 
 export default {

@@ -48,6 +48,20 @@ const failLogin = async (req, res) => {
   res.status(500).send({ error: "Failed" });
 };
 
+const logout = (req, res) => {
+  if (req.user) {
+      userLogout = req.user.username;
+      res.render(`logout`, { userLogout });
+      req.session.destroy(err => {
+          if (!err) {
+              console.log(`ok`);
+          } else {
+              console.log(`error`);
+          }
+      });
+  }
+}
+
 const authGitHub = () =>
   passport.authenticate(
     "github",
@@ -67,6 +81,8 @@ export default {
   failRegister,
   login,
   failLogin,
+  logout,
+  failLogout,
   authGitHub,
   failAuthGitHub,
 };

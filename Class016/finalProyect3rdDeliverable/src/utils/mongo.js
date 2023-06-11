@@ -1,5 +1,4 @@
-const { connect } = require("mongoose");
-
+import connect from "mongoose";
 class MongoSingleton {
   static #instance;
   constructor() {
@@ -19,4 +18,4 @@ class MongoSingleton {
   }
 }
 
-module.exports = MongoSingleton;
+export default MongoSingleton;

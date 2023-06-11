@@ -12,8 +12,8 @@ import session from "express-session";
 import sessionsRouter from "./routes/sessions.router.js";
 import MongoStore from "connect-mongo";
 import passport from "passport";
-import config from "./config/db.js";
-import initializePassport from "./config/passport.config.js";
+import config from "./config/db.config.js";
+import initializePassport from "../../examples/passport.config.js";
 
 const app = express();
 const PORT = config.port;

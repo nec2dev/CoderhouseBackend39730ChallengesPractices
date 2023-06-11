@@ -1,9 +1,12 @@
 import passport from "passport";
 import local from "passport-local";
-import UserCart from "../dao/mongo/cart.mongo.js";
-import UserManager from "../dao/mongo/user.mongo.js";
-import userModel from "../dao/mongo/user.mongo.js";
-import { createHash, isValidPassword } from "../utils/dirname.js";
+import UserCart from "../finalProyect3rdDeliverable/src/dao/mongo/cart.mongo.js";
+import UserManager from "../finalProyect3rdDeliverable/src/dao/mongo/user.mongo.js";
+import userModel from "../finalProyect3rdDeliverable/src/dao/mongo/user.mongo.js";
+import {
+  createHash,
+  isValidPassword,
+} from "../finalProyect3rdDeliverable/src/utils/dirname.js";
 
 const localStrategy = local.Strategy;
 const userManager = new UserManager();
