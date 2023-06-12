@@ -13,7 +13,7 @@ const createTicket = async (req, res) => {
 };
 
 const getTickets = async (req, res) => {
-  let result = await ticketManager.getAll();
+  let result = await ticketManager.getTickets();
   res.send({ status: "success", result: result });
 };
 

@@ -1,7 +1,6 @@
 import ProductManager from "../dao/mongo/product.mongo.js";
 
 const productManager = new ProductManager();
-
 const createProduct = async (req, res) => {
   const { title, description, price, code, quantity, category, thumbnail } =
     req.body;
@@ -19,13 +18,13 @@ const createProduct = async (req, res) => {
 };
 
 const getProducts = async (req, res) => {
-  let products = await productManager.getAll();
+  let products = await productManager.getProducts();
   res.send({ status: "success", payload: products });
 };
 
 const getProductById = async (req, res) => {
   let id = req.params.pid;
-  let product = await productManager.getOne(id);
+  let product = await productManager.getProductById(id);
   res.send({ status: "success", payload: product });
 };
 
@@ -64,7 +63,7 @@ const saveProduct = async (req, res) => {
     category,
     thumbnail,
   };
-  const result = await productManager.saveProduct(newProduct);
+  const result = await productManager.createProduct(newProduct);
   res.send({ status: "success", payload: result });
 };
 

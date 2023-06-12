@@ -1,16 +1,14 @@
-import UserManager from "../../../examples/dto/user.dto.js";
-import CartManager from "../../../examples/repositories/cart.repository.js";
+import UserManager from "../dao/mongo/user.mongo.js";
 
 const userManager = new UserManager();
-const cartManager = new CartManager();
-
 const createUser = async (req, res) => {
-  const { first_name, last_name, email, age, cart } = req.body;
-  let result = await userManager.saveUser({
+  const { first_name, last_name, email, age, password, cart } = req.body;
+  let result = await userManager.createUser({
     first_name,
     last_name,
     email,
     age,
+    password,
     cart,
   });
   res.send({ status: "success", payload: result });
@@ -71,6 +69,29 @@ const addUserToCart = async (req, res) => {
   res.send({ status: "success", message: "User add to cart" });
 };
 
+const signupFormController = (req, res) => res.render(`signup`);
+
+const loginFormController = (req, res) => res.render(`loginSession`);
+
+const logoutController = (req, res) => {
+  if (req.user) {
+    userLogout = req.user.username;
+    res.render(`logout`, { userLogout });
+    req.session.destroy((err) => {
+      if (!err) {
+        console.log(`ok`);
+      } else {
+        console.log(`error`);
+      }
+    });
+  }
+};
+
+const profileController = (req, res) => {
+  userLog = req.user;
+  res.render(`profile`, { userLog });
+};
+
 export default {
   createUser,
   getUsers,
@@ -78,4 +99,8 @@ export default {
   updateUser,
   deleteUser,
   addUserToCart,
+  signupFormController,
+  loginFormController,
+  logoutController,
+  profileController,
 };

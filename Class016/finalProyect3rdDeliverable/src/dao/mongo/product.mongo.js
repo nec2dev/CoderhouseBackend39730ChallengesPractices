@@ -1,43 +1,36 @@
-import mongoose from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2"
+import productModel from "../../models/product.model.js";
 
-const productCollection = 'products';
-const productSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
-    },
-    description:{
-        type:String,
-        required:true
-    },
-    price:{
-        type:Number,
-        required:true
-    },
-    thumbnail:{
-        type:String,
-        required:true
-    },
-    code:{
-        type:String,
-        required:true,
-        unique: true
-    },
-    stock:{
-        type:Number,
-        required:true
-    },
-    category:{
-        type:String,
-        required:true
-    },
-    status: {
-        type: Boolean,
-        default: true
+export default class Product{
+  constructor() {
+    console.log("Working in mongoDB with Products");
+  }
+
+  createProduct = async (product) => {
+    let result = await productModel.create(product);
+    return result;
+  };
+
+  getProducts = async () => {
+    let products = await productModel.find().lean();
+    return products;
+  };
+
+  getProductById = async (_id) => {
+    try {
+      const product = productModel.findById(_id);
+      return product;
+    } catch (error) {
+      console.log(error);
     }
-})
-productSchema.plugin(mongoosePaginate);
-const productModel = mongoose.model(productCollection , productSchema);
+  };
 
-export default productModel;
+  updateProduct = async (id, update) => {
+    let result = await productModel.findByIdAndUpdate(id, update);
+    return result;
+  };
+
+  deleteProduct = async (id) => {
+    let result = await productModel.findByIdAndDelete(id);
+    return result;
+  };
+}

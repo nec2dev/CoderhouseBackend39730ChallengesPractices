@@ -1,6 +1,6 @@
-import createTransport from `nodemailer`;
-import dotenv from `dotenv`;
-dotenv.config();
+import createTransport from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const EMAIL = process.env.EMAIL;
 const PASS = process.env.PASS_EMAIL_API;

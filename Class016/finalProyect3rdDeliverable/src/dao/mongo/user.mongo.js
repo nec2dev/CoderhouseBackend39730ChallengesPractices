@@ -1,44 +1,36 @@
-import mongoose from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
+import userModel from "../../models/user.model.js";
 
-const userCollection = "users";
-const userSchema = new mongoose.Schema({
-  first_name: {
-    type: String,
-    required: true,
-  },
-  last_name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  age: {
-    type: Number,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  cart: {
-    type: [
-      {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "carts",
-      },
-    ],
+export default class User {
+  constructor() {
+    console.log("Working in mongoDB with Users");
+  }
 
-    default: [],
-  },
-  role: {
-    type: String,
-    enum: ["user", "admin"],
-    default: "user",
-  },
-});
-userSchema.plugin(mongoosePaginate);
-const userModel = mongoose.model(userCollection, userSchema);
+  createUser = async (user) => {
+    let result = await userModel.create(user);
+    return result;
+  };
 
-export default userModel;
+  getUsers = async () => {
+    let users = await userModel.find().populate("cart");
+    return users.map((user) => user.toObject());
+  };
+
+  getUserById = async (_id) => {
+    try {
+      const user = userModel.findById(_id);
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  updateUser = async (id, update) => {
+    let result = await userModel.findByIdAndUpdate(id, update);
+    return result;
+  };
+
+  deleteUser = async (id) => {
+    let result = await userModel.findByIdAndDelete(id);
+    return result;
+  };
+}

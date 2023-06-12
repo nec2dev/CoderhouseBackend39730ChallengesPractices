@@ -8,4 +8,5 @@ export default {
   adminEmail: process.env.ADMIN_EMAIL,
   adminPassword: process.env.ADMIN_PASSWORD,
   cookieSecret: process.env.COOKIE_SECRET,
+  sessionSecret: process.env.SESSION_SECRET,
 };

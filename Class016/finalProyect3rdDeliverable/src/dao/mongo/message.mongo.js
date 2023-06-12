@@ -1,16 +1,17 @@
-import mongoose from "mongoose";
+import messageModel from "../../models/message.model.js";
 
-const messageCollection = 'messages';
-const messageSchema = new mongoose.Schema({
-    user:{
-        type:String,
-        required:true
-    },
-    message:{
-        type:String,
-        required:true
-    }
-})
-const messageModel = mongoose.model(messageCollection , messageSchema);
+export default class Message {
+  constructor() {
+    console.log("Working in mongoDB with Messages");
+  }
 
-export default messageModel;
+  createMessage = async (message) => {
+    let result = await messageModel.create(message);
+    return result;
+  };
+
+  getMessages = async () => {
+    let messages = await messageModel.find().lean();
+    return messages;
+  };
+}

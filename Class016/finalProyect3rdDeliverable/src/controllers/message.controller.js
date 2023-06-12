@@ -10,13 +10,13 @@ const createMessage = async (req, res) => {
 };
 
 const getMessages = async (req, res) => {
-  let messages = await messageManager.getAll();
+  let messages = await messageManager.getMessages();
   res.send({ status: "success", payload: messages });
 };
 
 const getMessageById = async (req, res) => {
   let id = req.params.mid;
-  let message = await messageManager.getOne(id);
+  let message = await messageManager(id);
   res.send({ status: "success", payload: message });
 };
 

@@ -1,26 +1,68 @@
-import mongoose from "mongoose";
+import ticketModel from "../../models/ticket.model.js";
 
-const collection = "tickets";
-const schema = new mongoose.Schema({
-  code: {
-    type: String,
-    require: true,
-    unique: true,
-  },
-  purchase_datetime: {
-    type: Date,
-    require: true,
-  },
-  amount: {
-    type: Number,
-    require: true,
-  },
-  purcharser: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "users",
-  },
-});
+export default class Ticket {
+  constructor() {
+    console.log("Working in mongoDB with tickets");
+  }
 
-const ticketModel = mongoose.model(collection, schema);
+  createTicket = async (ticket) => {
+    try {
+      let result = await ticketModel.create(ticket);
+      return result;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
 
-export default ticketModel;
+  getTickets = async () => {
+    try {
+      let products = await ticketModel.find();
+      return products;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  getTicketById = async (id) => {
+    try {
+      let product = await ticketModel.findOne({ _id: id });
+      return product;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  resolveTicket = async (id, ticket) => {
+    try {
+      let updateTicket = await ticketModel.updateOne(
+        { _id: id },
+        { $set: ticket }
+      );
+      return updateTicket;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  createCode = async () => {
+    try {
+      let isCodeUnique = false;
+      let ticketCode;
+      while (!isCodeUnique) {
+        ticketCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const existingTicket = await ticketModel.findOne({ code: ticketCode });
+        if (!existingTicket) {
+          isCodeUnique = true;
+        }
+      }
+      return ticketCode;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+}

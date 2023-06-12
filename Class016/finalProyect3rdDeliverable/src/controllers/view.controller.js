@@ -1,11 +1,12 @@
-import UserManager from "../controllers/user.controller.js";
-import cartModel from "../dao/mongo/cart.mongo.js";
-import productModel from "../dao/mongo/product.mongo.js";
+import UserManager from "../dao/mongo/user.mongo.js";
+import Message from "../dao/mongo/message.mongo.js";
+import cartModel from "../models/cart.model.js";
+import productModel from "../models/product.model.js";
 
-//const userManager = new UserManager();
-
+const userManager = new UserManager();
+const messagesManager = new Message();
 const renderUsers = async (req, res) => {
-  let users = await UserManager.getUsers();
+  let users = await userManager.getUsers();
   console.log(users);
   res.render("users", { users });
 };
@@ -41,7 +42,7 @@ const renderCart = async (req, res) => {
 };
 
 const renderMessages = async (req, res) => {
-  let messages = await messagesManager.getAll();
+  let messages = await messagesManager.getMessages();
   console.log(messages);
   res.render("chat", { messages });
 };

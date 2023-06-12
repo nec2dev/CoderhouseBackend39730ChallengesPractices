@@ -7,25 +7,25 @@ const productManager = new ProductManager();
 const createCart = async (req, res) => {
   const { products, user } = req.body;
   let newCart = { products, user };
-  const result = await cartManager.saveCart(newCart);
+  const result = await cartManager.createCart(newCart);
   res.send({ status: "success", payload: result });
 };
 
 const getCarts = async (req, res) => {
-  let carts = await cartManager.getAll();
+  let carts = await cartManager.getCarts();
   res.send({ status: "success", payload: carts });
 };
 
 const getCartById = async (req, res) => {
   let id = req.params.cid;
-  let cart = await cartManager.getOne(id);
+  let cart = await cartManager.getCartById(id);
   res.send({ status: "success", payload: cart });
 };
 
 const updateCart = async (req, res) => {
   let cid = req.params.cid;
   let products = req.body;
-  let cart = await cartManager.getOne(cid);
+  let cart = await cartManager.getCartById(cid);
   let cartProducts = cart.products;
   let productsIds = [];
   if (cartProducts.length > 0) {
@@ -51,7 +51,7 @@ const updateProductQuantity = async (req, res) => {
   let cid = req.params.cid;
   let pid = req.params.pid;
   let { quantity } = req.body;
-  let cart = await cartManager.getOne(cid);
+  let cart = await cartManager.getCartById(cid);
   let productExist = false;
   cart.products.forEach((product) => {
     if (product._id == pid) {
@@ -71,7 +71,7 @@ const updateProdInCart = async (req, res) => {
   let cid = req.params.cid;
   let pid = req.params.pid;
   let { quantity } = req.body;
-  let cart = await cartManager.getOne(cid);
+  let cart = await cartManager.getCartById(cid);
   let productExist = false;
   cart.products.forEach((product) => {
     if (product._id == pid) {
@@ -100,11 +100,11 @@ const deleteProdFromCart = async (req, res) => {
   let cid = req.params.cid;
   let pid = req.params.pid;
 
-  let productExist = await productManager.getOne(pid);
+  let productExist = await productManager.getProductById(pid);
   if (!productExist) {
     res.send({ status: 404, message: "El producto no existe" });
   } else {
-    let cart = await cartManager.getOne(cid);
+    let cart = await cartManager.getCartById(cid);
     if (!cart) {
       res.send({ status: 404, message: "El carrito no existe" });
     } else {
@@ -127,7 +127,7 @@ const deleteProdFromCart = async (req, res) => {
 
 const deleteAllProdFromCart = async (req, res) => {
   const cid = req.params.cid;
-  let cart = await cartManager.getOne(cid);
+  let cart = await cartManager.getCartById(cid);
   cart.products = [];
   let result = await cartManager.updateCart(cid, cart);
   res.send({ status: "Success", payload: result });

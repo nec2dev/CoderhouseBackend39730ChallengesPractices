@@ -1,17 +1,16 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
-import dotenv from "dotenv";
 import log4js from "../utils/logger.js";
 import sendEmail from "../utils/nodegmailer.js";
-import UserModel from "../dao/mongo/user.mongo.js";
-import { createHash, isValidPassword } from "../utils/utils.js";
+import userModel from "../dao/mongo/user.mongo.js";
+import { createHash, isValidPassword } from "../utils/dirname.js";
 
 const loggerArchiveError = log4js.getLogger(`errorArchive`);
 
 const deserializeUser = () => {
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await UserModel.findById(id);
+      const user = await userModel.findById(id);
       done(null, user);
     } catch (err) {
       loggerArchiveError.error(err);
@@ -27,7 +26,7 @@ const login = () => {
       { passReqToCallback: true },
       async (req, username, password, done) => {
         try {
-          const user = await UserModel.findOne({ username });
+          const user = await userModel.findOne({ username });
           if (!user) {
             return done(null, false);
           }
@@ -57,11 +56,11 @@ const signup = () => {
       { passReqToCallback: true },
       async (req, username, password, done) => {
         try {
-          const user = await UserModel.findOne({ username });
+          const user = await userModel.findOne({ username });
           if (user) {
             return done(null, false);
           }
-          const newUser = new UserModel();
+          const newUser = new userModel();
           newUser.username = username;
           newUser.password = createHash(password);
           newUser.email = req.body.email;

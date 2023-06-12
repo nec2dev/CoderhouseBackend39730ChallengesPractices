@@ -26,17 +26,17 @@ switch ("MONGO") {
     break;
   case "MONGO":
     MongoSingleton.getInstance();
-    const CartDAOMongo = require("./mongo/cart.mongo.js");
+    const CartDAOMongo = require("./models/cart.model.js");
     CartDAO = CartDAOMongo;
-    const MessageDAOMongo = require("./mongo/message.mongo.js");
+    const MessageDAOMongo = require("./models/message.model.js");
     MessageDAO = MessageDAOMongo;
-    const ProductDaoMongo = require("./mongo/product.mongo.js");
+    const ProductDaoMongo = require("./models/product.model.js");
     ProductDAO = ProductDaoMongo;
-    const SessionDAOMongo = require("./mongo/session.mongo.js");
+    const SessionDAOMongo = require("./models/session.model.js");
     SessionDAO = SessionDAOMongo;
-    const TicketDAOMongo = require("./mongo/ticket.mongo.js");
+    const TicketDAOMongo = require("./models/ticket.model.js");
     TicketDAO = TicketDAOMongo;
-    const UserDAOMongo = require("./mongo/user.mongo.js");
+    const UserDAOMongo = require("./models/user.model.js");
     UserDAO = UserDAOMongo;
     break;
   default:
