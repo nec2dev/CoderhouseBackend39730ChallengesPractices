@@ -1,0 +1,13 @@
+<h1>Carts List</h1>
+{{#each carts}}
+  <p>CartId: {{_id}}</p>
+  <p>Cart userId: {{user}}</p>
+  {{#each products}}
+    ProductId:
+    {{product}}
+    - Quantity:
+    {{quantity}}
+    <br />
+  {{/each}}
+  <br />
+{{/each}}
