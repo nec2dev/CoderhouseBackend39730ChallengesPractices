@@ -1,5 +1,5 @@
+// import DAO from '../persistence/DAOs/factory.js';
 import logger from "../utils/logger.js";
-
 class LoggerController {
   testLogger = async (req, res) => {
     try {
@@ -9,9 +9,9 @@ class LoggerController {
       logger.info("info");
       logger.http("http");
       logger.debug("debug");
-      res.json({ message: "Test finalizado." });
+      res.json({ message: "Test finished." });
     } catch (error) {
-      logger.error("Ha ocurrido un error.");
+      logger.error("An error has occurred.");
     }
   };
 }

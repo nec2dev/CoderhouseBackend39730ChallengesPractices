@@ -10,4 +10,6 @@ export default {
     ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
     GMAIL_USER: process.env.GMAIL_USER,
     GMAIL_PASSWORD: process.env.GMAIL_PASSWORD,
+    COOKIE_SECRET: process.env.COOKIE_SECRET,
+    SESSION_SECRET: process.env.SESSION_SECRET
 }

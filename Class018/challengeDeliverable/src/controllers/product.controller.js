@@ -1,15 +1,14 @@
 import DAO from '../persistence/DAOs/factory.js';
 
 const productManager = DAO.products;
-
 class ProductController {
     getProducts = async (req, res) => {
         try {
             const results = await productManager.getProducts(req.query);
             if (results) {
-                res.json({ message: 'Productos encontrados.', results })
+                res.json({ message: 'Products found.', results })
             } else {
-                res.json({ message: 'No hay productos disponibles.' })
+                res.json({ message: 'There are no products available.' })
             }
         } catch (error) {     
             res.status(500).json({ message: error.message })
@@ -20,7 +19,7 @@ class ProductController {
         try {   
             const mockingProducts = await productManager.getMockingProducts();
             if (mockingProducts) {
-                res.json({ message: 'Productos falsos.', results: mockingProducts })
+                res.json({ message: 'Fake products.', results: mockingProducts })
             }
         } catch (error) {
             res.status(500).json({ message: error.message })
@@ -32,9 +31,9 @@ class ProductController {
             const { productId } = req.params;
             const productFound = await productManager.getProductById(productId);
             if (productFound) {
-                res.json({ message: 'Producto encontrado.', product: productFound })
+                res.json({ message: 'Product found.', product: productFound })
             } else {
-                res.json({ message: 'Producto no encontrado.' })
+                res.json({ message: 'Product not found.' })
             }
         } catch (error) {
             res.status(500).json({ message: error.message })
@@ -46,9 +45,9 @@ class ProductController {
             const newProduct = req.body;
             const addedProduct = await productManager.addProduct(newProduct);
             if (addedProduct) {
-                res.json({ message: 'Producto agregado exitosamente.', product: addedProduct })
+                res.json({ message: 'Product added successfully.', product: addedProduct })
             } else {
-                res.json({ message: 'El producto no se ha podido agregar.' })
+                res.json({ message: 'The product could not be added.' })
             }
         } catch (error) {
             res.status(500).json({ message: error.message })
@@ -61,9 +60,9 @@ class ProductController {
             const newValuesObject = req.body;
             const updatedProduct = await productManager.updateProduct(productId, newValuesObject);
             if (updatedProduct) {
-                res.json({ message: 'Se ha actualizado el producto exitosamente.', product: updatedProduct })
+                res.json({ message: 'The product has been successfully updated.', product: updatedProduct })
             } else {
-                res.json({ message: 'El producto no se ha podido actualizar.' })  
+                res.json({ message: 'The product could not be updated.' })  
             }    
         } catch (error) {
             res.status(500).json({ message: error.message })
@@ -75,9 +74,9 @@ class ProductController {
             const { productId } = req.params;
             const deletedProduct = await productManager.deleteProduct(productId);
             if (deletedProduct) {
-                res.json({ message: 'Se ha eliminado el producto exitosamente.', product: deletedProduct })
+                res.json({ message: 'The product has been successfully removed.', product: deletedProduct })
             } else {
-                res.json({ message: 'El producto no se ha podido eliminar.' })
+                res.json({ message: 'The product could not be deleted.' })
             }
         } catch (error) {
             res.status(500).json({ message: error.message })

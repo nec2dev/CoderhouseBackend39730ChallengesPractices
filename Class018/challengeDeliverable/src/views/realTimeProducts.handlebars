@@ -1,28 +1,28 @@
-<h2>Agregar un producto</h2>
+<h2>Add a product</h2>
 <form id="add-product-form">
-  <label for="title">Nombre:</label>
+  <label for="title">Name:</label>
   <input type="text" id="title" name="title" />
-  <label for="description">Descripción:</label>
+  <label for="description">Description:</label>
   <input type="text" id="description" name="description" />
-  <label for="price">Precio:</label>
+  <label for="price">Price:</label>
   <input type="number" id="price" name="price" />
-  <label for="thumbnail">URL de la imagen:</label>
+  <label for="thumbnail">Thumbnail:</label>
   <input type="text" id="thumbnail" name="thumbnail" />
   <label for="code">Code:</label>
   <input type="text" id="code" name="code" />
   <label for="stock">Stock:</label>
   <input type="number" id="stock" name="stock" />
-  <label for="category">Categoría:</label>
+  <label for="category">Category:</label>
   <input type="text" id="category" name="category" />
-  <button type="submit">Agregar producto</button>
+  <button type="submit">Add product</button>
 </form>
-<h2>Eliminar un producto</h2>
+<h2>Delete a product</h2>
 <form id="delete-product-form">
-  <label for="id">ID del producto a eliminar:</label>
+  <label for="id">Product ID to delete:</label>
   <input type="text" id="id" name="id" />
-  <button type="submit">Eliminar producto</button>
+  <button type="submit">Delete product</button>
 </form>
-<h2>LISTA DE PRODUCTOS</h2>
+<h2>Products List</h2>
 <div id="real-time-products-list"></div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

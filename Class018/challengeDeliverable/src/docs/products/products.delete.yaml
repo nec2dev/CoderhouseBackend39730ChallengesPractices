@@ -14,9 +14,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                $ref: "#/components/schemas/Product"
               example:
-                message: Se ha eliminado el producto exitosamente.
+                message: Product has been successfully removed.
                 product:
                   _id: 60b4b0a9e6c3c2b4c8a7b8b2
                   title: Producto 1

@@ -10,7 +10,7 @@ paths:
           content:
             application/json:
               example:
-                message: El carrito ha sido creado exitosamente con el ID 60b4b0a9e6c3c2b4c8a7b8b1.
+                message: The cart has been successfully created with the ID 60b4b0a9e6c3c2b4c8a7b8b1.
         "400":
           description: Bad request.
           content:
@@ -44,7 +44,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Product'
               example:
-                message: El producto se ha agregado al carrito exitosamente.
+                message: The product has been added to the cart successfully.
                 product:
                   _id: 60b4b0a9e6c3c2b4c8a7b8b2
                   title: Producto 1

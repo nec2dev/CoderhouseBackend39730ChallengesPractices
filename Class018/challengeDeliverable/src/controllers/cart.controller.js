@@ -1,13 +1,12 @@
 import DAO from "../persistence/DAOs/factory.js";
 
 const cartManager = DAO.carts;
-
 class CartController {
   addCart = async (req, res) => {
     try {
       const addedCart = await cartManager.addCart();
       res.json({
-        message: `El carrito ha sido creado exitosamente con el ID ${addedCart._id}.`,
+        message: `The cart has been successfully created with the ID ${addedCart._id}.`,
       });
     } catch (error) {
       console.log(error);
@@ -19,9 +18,9 @@ class CartController {
       const { cartId } = req.params;
       const cart = await cartManager.getProductsFromCart(cartId);
       if (cart) {
-        res.json({ message: "Carrito encontrado.", cart: cart });
+        res.json({ message: "Cart found.", cart: cart });
       } else {
-        res.json({ message: "Carrito no encontrado." });
+        res.json({ message: "Cart not found." });
       }
     } catch (error) {
       console.log(error);
@@ -37,12 +36,12 @@ class CartController {
       );
       if (addedProduct) {
         res.json({
-          message: "El producto se ha agregado al carrito exitosamente.",
+          message: "The product has been added to the cart successfully.",
           product: addedProduct,
         });
       } else {
         res.json({
-          message: "El producto no ha podido ser agregado al carrito.",
+          message: "The product could not be added to the cart.",
         });
       }
     } catch (error) {
@@ -56,12 +55,12 @@ class CartController {
       const cart = await cartManager.deleteProductInCart(cartId, productId);
       if (cart) {
         res.json({
-          message: "El producto se ha eliminado del carrito exitosamente.",
+          message: "The product has been removed from the cart successfully.",
           cart: cart,
         });
       } else {
         res.json({
-          message: "El producto no ha podido ser eliminado al carrito.",
+          message: "The product could not be removed from the cart.",
         });
       }
     } catch (error) {
@@ -76,12 +75,12 @@ class CartController {
       const cart = await cartManager.replaceProductsInCart(cartId, products);
       if (cart) {
         res.json({
-          message: "Se han actualizado los productos del carrito exitosamente.",
+          message: "Cart products have been updated successfully.",
           cart: cart,
         });
       } else {
         res.json({
-          message: "No se han podido actualizar los productos del carrito.",
+          message: "The cart products could not be updated.",
         });
       }
     } catch (error) {
@@ -101,13 +100,13 @@ class CartController {
       if (cart) {
         res.json({
           message:
-            "Se ha actualizado la cantidad del producto en el carrito exitosamente.",
+            "The quantity of the product in the cart has been updated successfully.",
           cart: cart,
         });
       } else {
         res.json({
           message:
-            "No se ha podido actualizar la cantidad del producto en el carrito.",
+            "The quantity of the product in the cart could not be updated.",
         });
       }
     } catch (error) {
@@ -121,11 +120,11 @@ class CartController {
       const cart = await cartManager.emptyCart(cartId);
       if (cart) {
         res.json({
-          message: "Se ha vaciado el carrito exitosamente.",
+          message: "The cart has been emptied successfully.",
           cart: cart,
         });
       } else {
-        res.json({ message: "No se ha podido vaciar el carrito." });
+        res.json({ message: "The cart could not be emptied." });
       }
     } catch (error) {
       console.log(error);
@@ -140,7 +139,7 @@ class CartController {
       if (result) {
         res.json({ message: result });
       } else {
-        res.json({ message: "No se ha podido completar la compra." });
+        res.json({ message: "The purchase could not be completed." });
       }
     } catch (error) {
       console.log(error);

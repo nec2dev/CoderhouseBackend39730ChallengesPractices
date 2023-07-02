@@ -156,7 +156,6 @@ export default class CartMongo {
       console.log(error);
     }
   }
-
   async replaceProductsInCart(cartId, products) {
     try {
       if (cartId.length !== 24) {
@@ -221,7 +220,6 @@ export default class CartMongo {
       console.log(error);
     }
   }
-
   async emptyCart(cartId) {
     try {
       if (cartId.length !== 24) {
@@ -248,7 +246,6 @@ export default class CartMongo {
       console.log(error);
     }
   }
-
   async completePurchase(cartId, user) {
     const unavailableProducts = [];
     const purchasedProducts = [];

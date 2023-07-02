@@ -5,9 +5,9 @@ import logger from "../../utils/logger.js";
 (async () => {
   try {
     await mongoose.connect(config.MONGO_URL);
-    logger.info("Conectado a la base de datos correctamente.");
+    logger.info("Connected to the database successfully.");
   } catch (error) {
-    logger.error("Error de conexión a la base de datos.");
+    logger.error("Database connection error.");
     logger.error(error);
   }
 })();

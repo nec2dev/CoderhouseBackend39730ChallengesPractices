@@ -27,7 +27,7 @@ export default class ProductMongo {
         });
         return null;
       }
-      const newProduct = await productsModel.create(product);
+      const newProduct = await productModel.create(product);
       return newProduct;
     } catch (error) {
       console.log(error);
@@ -106,7 +106,7 @@ export default class ProductMongo {
     try {
       const mockingProducts = [];
       for (let i = 0; i < 100; i++) {
-        const product = await productsModel.create({
+        const product = await productModel.create({
           title: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
           price: faker.commerce.price(),
@@ -133,7 +133,7 @@ export default class ProductMongo {
         });
         return null;
       }
-      const product = productsModel.findById(id);
+      const product = productModel.findById(id);
       if (!product) {
         CustomError.createCustomError({
           name: ErrorsName.PRODUCT_DATA_NOT_FOUND_IN_DATABASE,
@@ -158,7 +158,7 @@ export default class ProductMongo {
         });
         return null;
       }
-      const product = await productsModel.findById(id);
+      const product = await productModel.findById(id);
       if (!product) {
         CustomError.createCustomError({
           name: ErrorsName.PRODUCT_DATA_NOT_FOUND_IN_DATABASE,
@@ -183,7 +183,7 @@ export default class ProductMongo {
         });
         return null;
       }
-      const updatedProduct = await productsModel.findByIdAndUpdate(
+      const updatedProduct = await productModel.findByIdAndUpdate(
         id,
         {
           title: newProduct.title,
@@ -213,7 +213,7 @@ export default class ProductMongo {
         });
         return null;
       }
-      const deletedProduct = await productsModel.findByIdAndDelete(id);
+      const deletedProduct = await productModel.findByIdAndDelete(id);
       if (!deletedProduct) {
         CustomError.createCustomError({
           name: ErrorsName.PRODUCT_DATA_NOT_FOUND_IN_DATABASE,
