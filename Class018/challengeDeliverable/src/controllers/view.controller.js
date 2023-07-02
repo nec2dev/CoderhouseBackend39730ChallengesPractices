@@ -1,7 +1,7 @@
 import DAO from "../persistence/DAOs/factory.js";
 
-const productManager = DAO.product;
-const cartManager = DAO.cart;
+const productManager = DAO.products;
+const cartManager = DAO.carts;
 
 class ViewController {
     getProducts = async (req, res) => {

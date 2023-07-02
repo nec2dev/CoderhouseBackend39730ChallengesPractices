@@ -12,12 +12,12 @@ import UserRouter from "./routes/user.router.js";
 import LoggerRouter from "./routes/logger.router.js";
 import "./persistence/mongo/config.mongo.js";
 import passport from "passport";
-import "./config/passport.js";
-import config from "./config/config.js";
+import "./config/passport.config.js";
+import config from "./config/env.config.js";
 import { errorMiddleware } from "./middlewares/errors.middleware.js";
 import swaggerUi from "swagger-ui-express";
-import { swaggerSetup } from "./config/swagger.js";
-import logger from "./utils/winston.js";
+import { swaggerSetup } from "./config/swagger.config.js";
+import logger from "./utils/logger.js";
 
 const app = express();
 
@@ -47,7 +47,7 @@ app.use("/api/carts", CartRouter.getRouter());
 app.use("/api/products", ProductRouter.getRouter());
 app.use("/api/users", UserRouter.getRouter());
 app.use("/views", ViewRouter.getRouter());
-app.use("/api/loggerTest", LoggerRouter.getRouter());
+app.use("/api/logger", LoggerRouter.getRouter());
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 app.use(errorMiddleware);
 

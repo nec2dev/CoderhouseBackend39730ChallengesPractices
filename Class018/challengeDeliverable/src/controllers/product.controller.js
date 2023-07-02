@@ -1,6 +1,6 @@
 import DAO from '../persistence/DAOs/factory.js';
 
-const productManager = DAO.product;
+const productManager = DAO.products;
 
 class ProductController {
     getProducts = async (req, res) => {

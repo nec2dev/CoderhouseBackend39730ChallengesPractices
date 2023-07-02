@@ -1,4 +1,4 @@
-import logger from "../utils/winston.js"
+import logger from "../utils/logger.js"
 
 export const createLog = (req, res, next) =>{
     logger.info(`Method: ${req.method} - URL: ${req.url} - date: ${Date().toString()}`);

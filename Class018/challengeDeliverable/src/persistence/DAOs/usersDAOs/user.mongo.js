@@ -1,5 +1,5 @@
 import { userModel } from "../../mongo/models/user.model.js";
-import config from "../../../config/config.js";
+import config from "../../../config/env.config.js";
 import CustomError from "../../../utils/errors/errors.custom.js";
 import {
   ErrorsName,

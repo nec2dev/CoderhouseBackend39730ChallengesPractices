@@ -117,7 +117,7 @@ export default class CartMongo {
         });
         return null;
       }
-      const cart = await cartsModel.findById(cartId);
+      const cart = await cartModel.findById(cartId);
       if (!cart) {
         CustomError.createCustomError({
           name: ErrorsName.CART_DATA_NOT_FOUND_IN_DATABASE,
@@ -126,7 +126,7 @@ export default class CartMongo {
         });
         return null;
       }
-      const product = await productsModel.findById(productId);
+      const product = await productModel.findById(productId);
       if (!product) {
         CustomError.createCustomError({
           name: ErrorsName.PRODUCT_DATA_NOT_FOUND_IN_DATABASE,
@@ -194,7 +194,7 @@ export default class CartMongo {
         });
         return null;
       }
-      const cart = await cartsModel.findById(cartId);
+      const cart = await cartModel.findById(cartId);
       if (!cart) {
         CustomError.createCustomError({
           name: ErrorsName.CART_DATA_NOT_FOUND_IN_DATABASE,

@@ -1,0 +1,80 @@
+{
+  message: 'Servidor escuchando al puerto 8080.',
+  level: 'info',
+  timestamp: '2023-07-02T02:04:43.844Z'
+}
+{
+  message: 'Conectado a la base de datos correctamente.',
+  level: 'info',
+  timestamp: '2023-07-02T02:04:45.922Z'
+}
+{
+  message: 'Servidor escuchando al puerto 8080.',
+  level: 'info',
+  timestamp: '2023-07-02T02:13:49.651Z'
+}
+{
+  message: 'Conectado a la base de datos correctamente.',
+  level: 'info',
+  timestamp: '2023-07-02T02:13:51.765Z'
+}
+{
+  message: 'Servidor escuchando al puerto 8080.',
+  level: 'info',
+  timestamp: '2023-07-02T11:42:16.351Z'
+}
+{
+  message: 'Conectado a la base de datos correctamente.',
+  level: 'info',
+  timestamp: '2023-07-02T11:42:18.274Z'
+}
+{
+  message: 'Servidor escuchando al puerto 8080.',
+  level: 'info',
+  timestamp: '2023-07-02T11:47:18.535Z'
+}
+{
+  message: 'Conectado a la base de datos correctamente.',
+  level: 'info',
+  timestamp: '2023-07-02T11:47:20.780Z'
+}
+{
+  message: 'Servidor escuchando al puerto 8080.',
+  level: 'info',
+  timestamp: '2023-07-02T11:49:21.199Z'
+}
+{
+  message: 'Conectado a la base de datos correctamente.',
+  level: 'info',
+  timestamp: '2023-07-02T11:49:23.560Z'
+}
+{
+  message: 'Servidor escuchando al puerto 8080.',
+  level: 'info',
+  timestamp: '2023-07-02T11:51:05.985Z'
+}
+{
+  message: 'Conectado a la base de datos correctamente.',
+  level: 'info',
+  timestamp: '2023-07-02T11:51:07.939Z'
+}
+{
+  message: 'fatal',
+  level: 'fatal',
+  timestamp: '2023-07-02T11:51:08.303Z'
+}
+{
+  message: 'error',
+  level: 'error',
+  timestamp: '2023-07-02T11:51:08.304Z'
+}
+{
+  message: 'warn',
+  level: 'warn',
+  timestamp: '2023-07-02T11:51:08.304Z'
+}
+{
+  message: 'info',
+  level: 'info',
+  timestamp: '2023-07-02T11:51:08.305Z'
+}
