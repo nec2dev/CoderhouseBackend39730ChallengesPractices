@@ -1,0 +1,14 @@
+[
+    {
+        "user": 1,
+        "message": "Hello, I'm a test message typed by TestName001 TestLastName001."
+    },
+    {
+        "user": 2,
+        "message": "Hello, I'm a test message typed by TestName002 TestLastName002."
+    },
+    {
+        "user": 3,
+        "message": "Hello, I'm a test message typed by TestName003 TestLastName003."
+    }
+]

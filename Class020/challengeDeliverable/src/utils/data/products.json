@@ -1,0 +1,111 @@
+[
+  {
+    "id": 1,
+    "title": "TestItem001",
+    "description": "This is a description for the item 001",
+    "price": 4096000,
+    "thumbnail": "./img/001Image.png",
+    "code": "A1001",
+    "stock": 4096,
+    "category": "1",
+    "status": true
+  },
+  {
+    "id": 2,
+    "title": "TestItem002",
+    "description": "This is a description for the item 002",
+    "price": 2048000,
+    "thumbnail": "./img/002Image.png",
+    "code": "A1002",
+    "stock": 2048,
+    "category": "2",
+    "status": true
+  },
+  {
+    "id": 3,
+    "title": "TestItem003",
+    "description": "This is a description for the item 003",
+    "price": 1024000,
+    "thumbnail": "./img/003Image.png",
+    "code": "A1003",
+    "stock": 1024,
+    "category": "3",
+    "status": true
+  },
+  {
+    "id": 4,
+    "title": "TestItem004",
+    "description": "This is a description for the item 004",
+    "price": 512000,
+    "thumbnail": "./img/004Image.png",
+    "code": "A1004",
+    "stock": 512,
+    "category": "1",
+    "status": true
+  },
+  {
+    "id": 5,
+    "title": "TestItem005",
+    "description": "This is a description for the item 005",
+    "price": 256000,
+    "thumbnail": "./img/005Image.png",
+    "code": "A1005",
+    "stock": 256,
+    "category": "1",
+    "status": true
+  },
+  {
+    "id": 6,
+    "title": "TestItem006",
+    "description": "This is a description for the item 006",
+    "price": 4096000,
+    "thumbnail": "./img/006Image.png",
+    "code": "A1006",
+    "stock": 4096,
+    "category": "2",
+    "status": true
+  },
+  {
+    "title": "TestItemUpdated007",
+    "description": "This is a description for the item 007",
+    "price": 4096000,
+    "thumbnail": "./img/007Image.png",
+    "code": "A1007",
+    "stock": 4096,
+    "category": "3",
+    "status": true
+  },
+  {
+    "id": 8,
+    "title": "TestItemUpdated008",
+    "description": "This is a description for the item 008",
+    "price": 4096000,
+    "thumbnail": "./img/008Image.png",
+    "code": "A1008",
+    "stock": 4096,
+    "category": "1",
+    "status": true
+  },
+  {
+    "id": 9,
+    "title": "TestItemUpdated009",
+    "description": "This is a description for the item 009",
+    "price": 4096000,
+    "thumbnail": "./img/009Image.png",
+    "code": "A1009",
+    "stock": 4096,
+    "category": "3",
+    "status": true
+  },
+  {
+    "id": 10,
+    "title": "TestItemUpdated010",
+        "description": "This is a description for the item 010",
+        "price": 4096000,
+        "thumbnail": "./img/010Image.png",
+        "code": "A1010",
+        "stock": 4096,
+        "category": "2",
+    "status": true
+  }
+]
