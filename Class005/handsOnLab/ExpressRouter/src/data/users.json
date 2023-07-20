@@ -1,0 +1,44 @@
+[
+    {
+        "name": "NombreTest001",
+        "lastname": "ApellidoTest001",
+        "mail": "user001@mailcompany.com",
+        "age": 24,
+        "id": 1
+    },
+    {
+        "name": "NombreTest002",
+        "lastname": "ApellidoTest002",
+        "mail": "user002@mailcompany.com",
+        "age": 25,
+        "id": 2
+    },
+    {
+        "name": "NombreTest003",
+        "lastname": "ApellidoTest003",
+        "mail": "user003@mailcompany.com",
+        "age": 26,
+        "id": 3
+    },
+    {
+        "name": "NombreTest004",
+        "lastname": "ApellidoTest004",
+        "mail": "user004@mailcompany.com",
+        "age": 27,
+        "id": 4
+    },
+    {
+        "name": "NombreTest005",
+        "lastname": "ApellidoTest005",
+        "mail": "user005@mailcompany.com",
+        "age": 28,
+        "id": 5
+    },
+    {
+        "name": "NombreTest006",
+        "lastname": "ApellidoTest006",
+        "mail": "user006@mailcompany.com",
+        "age": 29,
+        "id": 6
+    }
+]

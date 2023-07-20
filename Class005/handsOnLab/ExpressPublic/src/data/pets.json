@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Pickles",
+    "specie": "dog",
+    "breed": "pug",
+    "age": 10,
+    "price": 1000,
+    "image": "pet001.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Peanut",
+    "specie": "dog",
+    "breed": "mastin",
+    "age": 5,
+    "price": 500,
+    "image": "pet002.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Pumpkin",
+    "specie": "cat",
+    "breed": "persian",
+    "age": 3,
+    "price": 300,
+    "image": "pet003.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Pancake",
+    "specie": "cat",
+    "breed": "siames",
+    "age": 2,
+    "price": 200,
+    "image": "pet004.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Peach",
+    "specie": "hamster",
+    "breed": "syrian",
+    "age": 1,
+    "price": 100,
+    "image": "pet005.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Pineapple",
+    "specie": "hamster",
+    "breed": "dwarf",
+    "age": 1,
+    "price": 100,
+    "image": "pet006.jpg"
+  },
+  {
+    "id": "7",
+    "name": "Parsley",
+    "specie": "rabbit",
+    "breed": "dwarf",
+    "age": 1,
+    "price": 100,
+    "image": "pet007.jpg"
+  },
+  {
+    "id": "8",
+    "name": "Parsnip",
+    "specie": "horse",
+    "breed": "andalusian",
+    "age": 1,
+    "price": 100,
+    "image": "pet008.jpg"
+  },
+  {
+    "id": "9",
+    "name": "Papaya",
+    "specie": "horse",
+    "breed": "azabache",
+    "age": 1,
+    "price": 100,
+    "image": "pet009.jpg"
+  },
+  {
+    "id": "10",
+    "name": "Parsnip",
+    "specie": "horse",
+    "breed": "andalusian",
+    "age": 1,
+    "price": 100,
+    "image": "pet010.jpg"
+  }
+]
